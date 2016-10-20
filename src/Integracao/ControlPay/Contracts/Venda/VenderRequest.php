@@ -3,10 +3,10 @@
 namespace Integracao\ControlPay\Contracts\Venda;
 
 /**
- * Class Venda
- * @package Integracao\ControlPay\Contracts
+ * Class VenderRequest
+ * @package Integracao\ControlPay\Contracts\Venda
  */
-class Venda implements \JsonSerializable
+class VenderRequest implements \JsonSerializable
 {
     /**
      * @var integer

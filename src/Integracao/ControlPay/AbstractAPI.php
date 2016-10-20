@@ -3,6 +3,7 @@ namespace Integracao\ControlPay;
 
 use GuzzleHttp;
 use Integracao\ControlPay\Constants\ControlPayParameter;
+use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 
 /**
  * Class AbstractAPI
@@ -31,6 +32,11 @@ abstract class AbstractAPI
     protected $endpoint;
 
     /**
+     * @var GuzzleHttp\Query
+     */
+    protected $query;
+
+    /**
      * @var array
      */
     protected $headers = [
@@ -49,8 +55,20 @@ abstract class AbstractAPI
         $this->_client = $client;
 
         if(is_null($this->_client))
-        {
             $this->_client = new Client();
+
+        $this->query = new GuzzleHttp\Query();
+        $this->query->setEncodingType(false);
+
+
+        switch ($this->_client->getParameter(ControlPayParameter::CONTROLPAY_OAUTH_TYPE))
+        {
+            case KeyQueryStringAuthentication::class:
+                $this->query->set('key', $this->_client->getAuthentication());
+                break;
+            default:
+                $this->headers['Authorization'] = $this->_client->getAuthentication();
+                break;
         }
 
         $this->_httpClient = new GuzzleHttp\Client([
@@ -62,11 +80,29 @@ abstract class AbstractAPI
             'verify' => false,
             'defaults' => [
                 'headers' => $this->headers,
-                'query' => [
-                    'Key' => $this->_client->getAuthentication()
-                ]
+                'query' => $this->query
             ]
         ]);
+    }
+
+    /**
+     * Monta parâmetros para serem passados por querystring
+     *
+     * @param array $param
+     * @return string
+     */
+    protected function getQueryString(array $param, $urlEncode = false)
+    {
+        if(is_null($param))
+            return null;
+
+        $queryString = implode(array_map(function($v, $k) use ($urlEncode){
+            if(is_bool($v))
+                $v = ($v ? 'true' : 'false');
+            return sprintf("%s=%s&",$k, $urlEncode ? urlencode($v) : $v);
+        },$param,array_keys($param)));
+
+        return $queryString;
     }
 
 }

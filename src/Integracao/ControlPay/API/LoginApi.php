@@ -2,6 +2,8 @@
 
 namespace Integracao\ControlPay\API;
 
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\RequestException;
 use Integracao\ControlPay\AbstractAPI;
 use Integracao\ControlPay\Client;
 use Integracao\ControlPay\Contracts;
@@ -38,6 +40,27 @@ class LoginApi extends AbstractAPI
                 $response->json(),
                 Contracts\Login\LoginResponse::class
             );
+        }catch (RequestException $ex) {
+            $responseBody = $ex->getResponse()->json();
+            throw new \Exception($responseBody['message']);
+        }catch (\Exception $ex){
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
+        }
+    }
+
+    /**
+     * @return Contracts\Login\LoginResponse
+     * @throws \Exception
+     */
+    public function logOut()
+    {
+        try{
+            $this->_httpClient->post(__FUNCTION__,[]);
+
+            return true;
+        }catch (RequestException $ex) {
+            $responseBody = $ex->getResponse()->json();
+            throw new \Exception($responseBody['message']);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
@@ -59,6 +82,9 @@ class LoginApi extends AbstractAPI
                 $response->json(),
                 Contracts\Login\ConsultaLoginResponse::class
             );
+        }catch (RequestException $ex) {
+            $responseBody = $ex->getResponse()->json();
+            throw new \Exception($responseBody['message']);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }

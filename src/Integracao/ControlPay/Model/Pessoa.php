@@ -1,6 +1,7 @@
 <?php
 
 namespace Integracao\ControlPay\Model;
+use Integracao\ControlPay\Helpers\SerializerHelper;
 use phpDocumentor\Reflection\Types\array_;
 
 /**
@@ -251,6 +252,10 @@ class Pessoa
     public function setPessoaStatus($pessoaStatus)
     {
         $this->pessoaStatus = $pessoaStatus;
+
+        if(is_array($this->pessoaStatus))
+            $this->pessoaStatus = SerializerHelper::denormalize($this->pessoaStatus, PessoaStatus::class);
+
         return $this;
     }
 

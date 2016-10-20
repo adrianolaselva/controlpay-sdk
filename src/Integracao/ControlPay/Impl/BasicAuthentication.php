@@ -35,9 +35,12 @@ class BasicAuthentication implements IAuthentication
 
     /**
      * @return string
+     * @throws \Exception
      */
     public function getAuthorization()
     {
+        throw new \Exception("Basic authenticanão não é suportado pela api por enquanto");
+
         return sprintf("Basic %s", base64_encode(sprintf("%s:%s", $this->user, $this->password)));
     }
 

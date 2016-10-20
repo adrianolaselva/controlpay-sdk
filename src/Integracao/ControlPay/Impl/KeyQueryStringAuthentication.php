@@ -43,7 +43,7 @@ class KeyQueryStringAuthentication implements IAuthentication
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getAuthorization()
     {
@@ -53,7 +53,6 @@ class KeyQueryStringAuthentication implements IAuthentication
                 ->setSenha($this->password)
                 ->setCpfCnpj($this->user)
         );
-
         return $response->getPessoa()->getKey();
     }
 

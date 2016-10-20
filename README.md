@@ -43,12 +43,8 @@ Para obter a versão configure seu composer.json conforme exemplo abaixo:
         }
     ],
     "require": {
-        "controlpay/ntk-pedido-sdk": "0.1.0"
+        "adrianolaselva/controlpay-sdk": "0.1.0"
     },
-    "repositories": [{
-        "type": "vcs",
-		"url": "https://ntkdesenv@bitbucket.org/controlpay/controlpay-sdk.git"
-    }],
 	"minimum-stability": "dev",
 	"prefer-stable" : true
 }
