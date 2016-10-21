@@ -3,7 +3,6 @@ namespace Integracao\ControlPay;
 
 use Integracao\ControlPay\Constants\ControlPayParameter;
 use Integracao\ControlPay\Factory\AuthenticationFactory;
-use Integracao\ControlPay\Impl\BasicAuthentication;
 use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 use Integracao\ControlPay\Interfaces\IAuthentication;
 

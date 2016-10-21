@@ -1,3 +1,18 @@
+
+[![version][packagist-badge]][packagist]
+[packagist-badge]: https://img.shields.io/packagist/v/adrianolaselva/controlpay-sdk.svg
+[packagist]: https://packagist.org/packages/adrianolaselva/controlpay-sdk
+[![Build Status](https://travis-ci.org/adrianolaselva/controlpay-sdk.svg?branch=master)](https://travis-ci.org/adrianolaselva/controlpay-sdk)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/adrianolaselva/controlpay-sdk/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/adrianolaselva/controlpay-sdk/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/adrianolaselva/controlpay-sdk/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/adrianolaselva/controlpay-sdk/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/adrianolaselva/controlpay-sdk/badges/build.png?b=master)](https://scrutinizer-ci.com/g/adrianolaselva/controlpay-sdk/build-status/master)
+
+[![Total Downloads](https://poser.pugx.org/adrianolaselva/controlpay-sdk/downloads)](https://packagist.org/packages/adrianolaselva/controlpay-sdk)
+[![Monthly Downloads](https://poser.pugx.org/adrianolaselva/controlpay-sdk/d/monthly)](https://packagist.org/packages/adrianolaselva/controlpay-sdk)
+[![Daily Downloads](https://poser.pugx.org/adrianolaselva/controlpay-sdk/d/daily)](https://packagist.org/packages/adrianolaselva/controlpay-sdk)
+
+[![License](https://poser.pugx.org/adrianolaselva/controlpay-sdk/license)](https://packagist.org/packages/adrianolaselva/controlpay-sdk)
+
 ## Componente de integração com API de ControlPay plataforma
 
 Este Projeto tem por finalidade prover uma integração menos traumática e padronizada com as API's 
