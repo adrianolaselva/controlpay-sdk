@@ -19,7 +19,6 @@ $this->client = new \Integracao\ControlPay\Client([
 ]);
 
 $vendaApi = new VendaAPI($client);
-
 ```
 
     * Passar como parâmetro a partir de uma instância do Client.
@@ -34,7 +33,6 @@ $client->setParameter(ControlPayParameter::CONTROLPAY_TIMEOUT, 10);
 $client->setParameter(ControlPayParameter::CONTROLPAY_KEY, "");
 
 $vendaApi = new VendaAPI($client);
-
 ```
 
 Para obter a versão configure seu composer.json conforme exemplo abaixo:
