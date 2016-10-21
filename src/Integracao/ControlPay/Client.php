@@ -17,14 +17,21 @@ class Client
     /**
      * @var string
      */
-    const CONTROLPAY_HOST_DEFAULT_URL = "";
+    const CONTROLPAY_HOST_DEFAULT = "";
 
     /**
      * Timeout padrão
      *
      * @var integer
      */
-    const CONTROLPAY_HOST_DEFAULT_TIMEOUT = 10;
+    const CONTROLPAY_TIMEOUT_DEFAULT = 25;
+
+    /**
+     * Timeout padrão
+     *
+     * @var IAuthentication
+     */
+    const CONTROLPAY_OAUTH_TYPE_DEFAULT = KeyQueryStringAuthentication::class;
 
     /**
      * Parâmetros, pré inicializado com valores padrão
@@ -32,8 +39,9 @@ class Client
      * @var array
      */
     private $_params = [
-        ControlPayParameter::CONTROLPAY_HOST => self::CONTROLPAY_HOST_DEFAULT_URL,
-        ControlPayParameter::CONTROLPAY_TIMEOUT => self::CONTROLPAY_HOST_DEFAULT_TIMEOUT
+        ControlPayParameter::CONTROLPAY_HOST => self::CONTROLPAY_HOST_DEFAULT,
+        ControlPayParameter::CONTROLPAY_TIMEOUT => self::CONTROLPAY_TIMEOUT_DEFAULT,
+        ControlPayParameter::CONTROLPAY_OAUTH_TYPE => self::CONTROLPAY_OAUTH_TYPE_DEFAULT
     ];
 
     /**
@@ -63,7 +71,7 @@ class Client
      */
     public function getParameter($key)
     {
-        return $this->_params[$key];
+        return isset($this->_params[$key]) ? $this->_params[$key] : null;
     }
 
     /**

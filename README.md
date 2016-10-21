@@ -10,25 +10,29 @@ Para iniciar o uso os seguintes passos devem ser executados
     * Passar como parâmetro no construtor em forma de array.
 
 ```php
-$client = new Integracao\ControlPay\Client([
-    "CONTROLPAY_HOST"  => "",
-    "CONTROLPAY_USER"  => "",
-    "CONTROLPAY_PWD"  => "",
-    "CONTROLPAY_TIMEOUT"  => ""
+$this->client = new \Integracao\ControlPay\Client([
+    ControlPayParameter::CONTROLPAY_HOST => "http://...",
+    ControlPayParameter::CONTROLPAY_TIMEOUT => 10,
+    ControlPayParameter::CONTROLPAY_USER => "",
+    ControlPayParameter::CONTROLPAY_PWD => "",
+    ControlPayParameter::CONTROLPAY_KEY => ""
 ]);
+
+$vendaApi = new VendaAPI($client);
 ```
 
     * Passar como parâmetro a partir de uma instância do Client.
 
 ```php
-$client = new Integracao\ControlPay\Client();
+$client = new \Integracao\ControlPay\Client();
 
-$client->setParameter(ControlPayParameter::CONTROLPAY_HOST, "");
+$client->setParameter(ControlPayParameter::CONTROLPAY_HOST, "http://...");
 $client->setParameter(ControlPayParameter::CONTROLPAY_USER, "");
 $client->setParameter(ControlPayParameter::CONTROLPAY_PWD, "");
-$client->setParameter(ControlPayParameter::CONTROLPAY_TIMEOUT, 5000);
+$client->setParameter(ControlPayParameter::CONTROLPAY_TIMEOUT, 10);
+$client->setParameter(ControlPayParameter::CONTROLPAY_KEY, "");
 
-$pedidoApi = new PedidoAPI($client);
+$vendaApi = new VendaAPI($client);
 ```
 
 Para obter a versão configure seu composer.json conforme exemplo abaixo:
@@ -45,7 +49,6 @@ Para obter a versão configure seu composer.json conforme exemplo abaixo:
     "require": {
         "adrianolaselva/controlpay-sdk": "0.1.0"
     },
-	"minimum-stability": "dev",
 	"prefer-stable" : true
 }
 ```
@@ -53,7 +56,7 @@ Para obter a versão configure seu composer.json conforme exemplo abaixo:
 Certifique-se que as configurações foram preenchidas corretamente executando os testes presentes no diretório "/vendor/adrianolaselva/controlpay-sdk/tests/*"
 
 ```sh
-./tests/execute.sh
+phpunit
 ```
 
-[Bitbucket]: <https://ntkdesenv@bitbucket.org/adrianolaselva/controlpay-sdk.git>
+[GitHub]: <https://github.com/adrianolaselva/controlpay-sdk.git>
