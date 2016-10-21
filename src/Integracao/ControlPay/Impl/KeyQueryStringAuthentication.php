@@ -30,16 +30,21 @@ class KeyQueryStringAuthentication implements IAuthentication
      * @var LoginApi
      */
     private $_loginApi;
+    /**
+     * @var null
+     */
+    private $key;
 
     /**
      * KeyQueryStringAuthentication constructor.
      */
-    public function __construct($user, $password, $pessoaId = null, Client $client)
+    public function __construct($user, $password, $key = null, $pessoaId = null, Client $client)
     {
         $this->_loginApi = new LoginApi($client);
         $this->user = $user;
         $this->password = $password;
         $this->pessoaId = $pessoaId;
+        $this->key = $key;
     }
 
     /**
@@ -47,6 +52,9 @@ class KeyQueryStringAuthentication implements IAuthentication
      */
     public function getAuthorization()
     {
+        if(!empty($this->key))
+            return $this->key;
+
         $response = $this->_loginApi->login(
             (new LoginRequest())
                 ->setPessoaId($this->pessoaId)

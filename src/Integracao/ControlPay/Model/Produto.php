@@ -1,6 +1,7 @@
 <?php
 
 namespace Integracao\ControlPay\Model;
+use Integracao\ControlPay\Helpers\SerializerHelper;
 
 /**
  * Class Produto
@@ -32,6 +33,26 @@ class Produto implements \JsonSerializable
      * @var float
      */
     private $valor;
+
+    /**
+     * @var float
+     */
+    private $preco;
+
+    /**
+     * @var string
+     */
+    private $fotoThumbnail;
+
+    /**
+     * @var string
+     */
+    private $ean;
+
+    /**
+     * @var ProdutoStatus
+     */
+    private $produtoStatus;
 
     /**
      * Produto constructor.
@@ -130,6 +151,82 @@ class Produto implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return float
+     */
+    public function getPreco()
+    {
+        return $this->preco;
+    }
+
+    /**
+     * @param float $preco
+     * @return Produto
+     */
+    public function setPreco($preco)
+    {
+        $this->preco = $preco;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFotoThumbnail()
+    {
+        return $this->fotoThumbnail;
+    }
+
+    /**
+     * @param string $fotoThumbnail
+     * @return Produto
+     */
+    public function setFotoThumbnail($fotoThumbnail)
+    {
+        $this->fotoThumbnail = $fotoThumbnail;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEan()
+    {
+        return $this->ean;
+    }
+
+    /**
+     * @param string $ean
+     * @return Produto
+     */
+    public function setEan($ean)
+    {
+        $this->ean = $ean;
+        return $this;
+    }
+
+    /**
+     * @return ProdutoStatus
+     */
+    public function getProdutoStatus()
+    {
+        return $this->produtoStatus;
+    }
+
+    /**
+     * @param ProdutoStatus $produtoStatus
+     * @return Produto
+     */
+    public function setProdutoStatus($produtoStatus)
+    {
+        $this->produtoStatus = $produtoStatus;
+
+        if(is_array($this->produtoStatus))
+            $this->produtoStatus = SerializerHelper::denormalize($this->produtoStatus, ProdutoStatus::class);
+
+        return $this;
+    }
+
     function jsonSerialize()
     {
         return [
@@ -138,6 +235,10 @@ class Produto implements \JsonSerializable
             "Descricao" => $this->descricao,
             "Valor" => $this->valor,
             "Quantidade" => $this->quantidade,
+            "preco" => $this->preco,
+            "ean" => $this->ean,
+            "produtoStatus" => $this->produtoStatus,
+            "fotoThumbnail" => $this->fotoThumbnail,
         ];
     }
 

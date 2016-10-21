@@ -86,23 +86,24 @@ abstract class AbstractAPI
     }
 
     /**
-     * Monta parâmetros para serem passados por querystring
+     * Adiciona parâmetros mantendo os já inicializados como padrão
      *
-     * @param array $param
+     * @param array $params
      * @return string
      */
-    protected function getQueryString(array $param, $urlEncode = false)
+    protected function addQueryAdditionalParameters(array $params)
     {
-        if(is_null($param))
-            return null;
+        $this->query = new GuzzleHttp\Query();
 
-        $queryString = implode(array_map(function($v, $k) use ($urlEncode){
-            if(is_bool($v))
-                $v = ($v ? 'true' : 'false');
-            return sprintf("%s=%s&",$k, $urlEncode ? urlencode($v) : $v);
-        },$param,array_keys($param)));
+        if(isset($this->_httpClient->getDefaultOption()['query']))
+            $this->query = $this->_httpClient->getDefaultOption()['query'];
 
-        return $queryString;
+        foreach ($params as $key => $value)
+            $this->query->set($key, $value);
+
+        return $this->query;
     }
+
+
 
 }

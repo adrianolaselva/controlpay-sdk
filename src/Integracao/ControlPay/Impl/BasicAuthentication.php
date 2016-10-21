@@ -22,15 +22,21 @@ class BasicAuthentication implements IAuthentication
     private $password;
 
     /**
+     * @var string
+     */
+    private $key;
+
+    /**
      * BasicAuthentication constructor.
      *
      * @param string $user
      * @param string $password
      */
-    public function __construct($user, $password)
+    public function __construct($user, $password, $key = null)
     {
         $this->user = $user;
         $this->password = $password;
+        $this->key = $key;
     }
 
     /**
@@ -40,6 +46,9 @@ class BasicAuthentication implements IAuthentication
     public function getAuthorization()
     {
         throw new \Exception("Basic authenticanão não é suportado pela api por enquanto");
+
+        if(!empty($this->key))
+            return sprintf("Basic %s", $this->key);
 
         return sprintf("Basic %s", base64_encode(sprintf("%s:%s", $this->user, $this->password)));
     }

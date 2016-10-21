@@ -2,13 +2,12 @@
 
 namespace Integracao\ControlPay\Model;
 use Integracao\ControlPay\Helpers\SerializerHelper;
-use phpDocumentor\Reflection\Types\array_;
 
 /**
  * Class Pessoa
  * @package Integracao\ControlPay\Model
  */
-class Pessoa
+class Pessoa implements \JsonSerializable
 {
     /**
      * @var integer
@@ -672,5 +671,36 @@ class Pessoa
         $this->endereco = $endereco;
         return $this;
     }
+
+    function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'cpfCnpj' => $this->cpfCnpj,
+            'data' => $this->data,
+            'dataAcesso' => $this->dataAcesso,
+            'dataCheckIn' => $this->dataCheckIn,
+            'dataLogin' => $this->dataLogin,
+            'dataLoginAnterior' => $this->dataLoginAnterior,
+            'dataLogout' => $this->dataLogout,
+            'email' => $this->email,
+            'endereco' => $this->endereco,
+            'foto' => $this->foto,
+            'fotoUrl' => $this->fotoUrl,
+            'ip' => $this->ip,
+            'key' => $this->key,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
+            'nomeRazaoSocial' => $this->nomeRazaoSocial,
+            'sobrenomeNomeFantasia' => $this->sobrenomeNomeFantasia,
+            'telefone1' => $this->telefone1,
+            'telefone2' => $this->telefone2,
+            'senha' => $this->senha,
+            'pessoaJuridica' => $this->pessoaJuridica,
+            'pessoaProprietario' => $this->pessoaProprietario,
+            'pessoaStatus' => $this->pessoaStatus,
+        ];
+    }
+
 
 }

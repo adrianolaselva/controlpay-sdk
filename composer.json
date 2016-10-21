@@ -19,7 +19,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Integracao\\": "src/Integracao/"
+            "Integracao\\": "src/Integracao/",
+            "Tests\\Integracao\\": "tests/Integracao/"
         }
     }
 }

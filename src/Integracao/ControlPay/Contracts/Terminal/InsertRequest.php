@@ -1,13 +1,17 @@
 <?php
 
-namespace Integracao\ControlPay\Model;
+namespace Integracao\ControlPay\Contracts\Terminal;
+
 use Integracao\ControlPay\Helpers\SerializerHelper;
+use Integracao\ControlPay\Model\Impressora;
+use Integracao\ControlPay\Model\Pessoa;
+use Integracao\ControlPay\Model\Terminal;
 
 /**
- * Class Terminal
- * @package Integracao\ControlPay\Model
+ * Class InsertRequest
+ * @package Integracao\ControlPay\Contracts\Produto
  */
-class Terminal implements \JsonSerializable
+class InsertRequest implements \JsonSerializable
 {
     /**
      * @var integer
@@ -125,4 +129,5 @@ class Terminal implements \JsonSerializable
             'pessoa' => $this->pessoa,
         ];
     }
+
 }

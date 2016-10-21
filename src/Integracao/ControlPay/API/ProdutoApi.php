@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: a.moreira
- * Date: 20/10/2016
- * Time: 09:51
- */
 
 namespace Integracao\ControlPay\API;
 
@@ -15,35 +9,37 @@ use Integracao\ControlPay\Helpers\SerializerHelper;
 use Integracao\ControlPay\Contracts;
 
 /**
- * Class VenderApi
+ * Class ProdutoApi
  * @package Integracao\ControlPay\API
  */
-class VenderApi extends AbstractAPI
+class ProdutoApi extends AbstractAPI
 {
 
     /**
-     * VenderApi constructor.
+     * ProdutoApi constructor.
      */
     public function __construct(Client $client = null)
     {
-        parent::__construct('venda', $client);
+        parent::__construct('produto', $client);
     }
 
     /**
-     * @param Contracts\Venda\VenderRequest $venderRequest
+     * @param integer $pessoaId
      * @return Contracts\Venda\VenderResponse
      * @throws \Exception
      */
-    public function vender(Contracts\Venda\VenderRequest $venderRequest)
+    public function getByAtivosByPessoaId($pessoaId)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
-                'body' => json_encode($venderRequest),
+            $response = $this->_httpClient->get(__FUNCTION__,[
+                'query' => $this->addQueryAdditionalParameters([
+                    'pessoaId' => $pessoaId
+                ])
             ]);
 
             return SerializerHelper::denormalize(
                 $response->json(),
-                Contracts\Venda\VenderResponse::class
+                Contracts\Produto\GetByAtivosByPessoaIdResponse::class
             );
         }catch (RequestException $ex) {
             $responseBody = $ex->getResponse()->json();

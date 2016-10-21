@@ -29,13 +29,15 @@ class AuthenticationFactory
             case BasicAuthentication::class:
                 return new BasicAuthentication(
                     isset($params[ControlPayParameter::CONTROLPAY_USER]) ?$params[ControlPayParameter::CONTROLPAY_USER] : null,
-                    isset($params[ControlPayParameter::CONTROLPAY_PWD]) ?$params[ControlPayParameter::CONTROLPAY_PWD] : null
+                    isset($params[ControlPayParameter::CONTROLPAY_PWD]) ?$params[ControlPayParameter::CONTROLPAY_PWD] : null,
+                    isset($params[ControlPayParameter::CONTROLPAY_KEY]) ?$params[ControlPayParameter::CONTROLPAY_KEY] : null
                 );
                 break;
             case KeyQueryStringAuthentication::class:
                 return new KeyQueryStringAuthentication(
                     isset($params[ControlPayParameter::CONTROLPAY_USER]) ?$params[ControlPayParameter::CONTROLPAY_USER] : null,
                     isset($params[ControlPayParameter::CONTROLPAY_PWD]) ?$params[ControlPayParameter::CONTROLPAY_PWD] : null,
+                    isset($params[ControlPayParameter::CONTROLPAY_KEY]) ?$params[ControlPayParameter::CONTROLPAY_KEY] : null,
                     isset($params[ControlPayParameter::CONTROLPAY_PESSOAID]) ?$params[ControlPayParameter::CONTROLPAY_PESSOAID] : null,
                     $client
                 );

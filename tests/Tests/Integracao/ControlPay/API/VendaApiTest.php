@@ -1,73 +1,38 @@
 <?php
 
-namespace Integracao\NTKOnline\Api;
+namespace Tests\Integracao\NTKOnline\Api;
 
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
-use Integracao\ControlPay\API\LoginApi;
-use Integracao\ControlPay\API\VenderApi;
-use Integracao\ControlPay\Constants\ControlPayParameter;
-use Integracao\ControlPay\Contracts\Login\ConsultaLoginRequest;
-use Integracao\ControlPay\Contracts\Login\Login;
-use Integracao\ControlPay\Contracts\Login\LoginRequest;
+use Integracao\ControlPay\API\VendaApi;
 use Integracao\ControlPay\Contracts\Venda\VenderRequest;
-use Integracao\ControlPay\Impl\BasicAuthentication;
-use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 use Integracao\ControlPay\Model\FluxoPagamento;
 use Integracao\ControlPay\Model\FormaPagamento;
 use Integracao\ControlPay\Model\IntencaoVenda;
 use Integracao\ControlPay\Model\IntencaoVendaStatus;
 use Integracao\ControlPay\Model\Pessoa;
-use Integracao\ControlPay\Model\PessoaStatus;
 use Integracao\ControlPay\Model\Produto;
 use Integracao\ControlPay\Model\Terminal;
-use Integracao\NTKOnline\Client;
+use Tests\Integracao\ControlPay\PHPUnit;
 
 /**
- * Class VenderApiTest
+ * Class VendaApiTest
  * @package Integracao\NTKOnline\Api
  *
  */
-class VenderApiTest extends \PHPUnit_Framework_TestCase
+class VendaApiTest extends PHPUnit
 {
 
     /**
-     * @var VenderApi
+     * @var VendaApi
      */
     private $_venderApi;
-
-    /**
-     * @var string
-     */
-    private $host;
-
-    /**
-     * @var string
-     */
-    private $user;
-
-    /**
-     * @var string
-     */
-    private $pwd;
 
     /**
      * UsuarioApi constructor.
      */
     public function __construct()
     {
-        $this->host = getenv(ControlPayParameter::CONTROLPAY_HOST);
-        $this->user = getenv(ControlPayParameter::CONTROLPAY_USER);
-        $this->pwd = getenv(ControlPayParameter::CONTROLPAY_PWD);
-        $client = new \Integracao\ControlPay\Client([
-            ControlPayParameter::CONTROLPAY_HOST => $this->host,
-            ControlPayParameter::CONTROLPAY_TIMEOUT => 10,
-            ControlPayParameter::CONTROLPAY_OAUTH_TYPE => KeyQueryStringAuthentication::class,
-            ControlPayParameter::CONTROLPAY_USER => $this->user,
-            ControlPayParameter::CONTROLPAY_PWD => $this->pwd,
-        ]);
-
-        $this->_venderApi = new VenderApi($client);
+        parent::__construct();
+        $this->_venderApi = new VendaApi($this->client);
     }
 
     public function test_vender_semtef()
@@ -117,6 +82,47 @@ class VenderApiTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
         $this->assertNotEmpty($response->getIntencaoVenda()->getProdutos());
         $this->assertNotEmpty($response->getIntencaoVenda()->getPagamentosExterno());
+    }
+
+    public function test_consultarVendas()
+    {
+        $response = $this->_venderApi->consultarVendas([
+            1,2,3,4
+        ]);
+
+        $this->assertNotEmpty($response->getData());
+        $this->assertInstanceOf(\DateTime::class, $response->getData());
+        if(!empty($response->getIntencoesVendas()))
+            foreach ($response->getIntencoesVendas() as $intencaoVenda)
+            {
+                $this->assertNotEmpty($intencaoVenda->getId());
+                $this->id = $intencaoVenda->getId();
+                $this->assertNotEmpty($intencaoVenda->getToken());
+                $this->assertNotEmpty($intencaoVenda->getData());
+                $this->assertInstanceOf(\DateTime::class, $intencaoVenda->getData());
+                $this->assertGreaterThanOrEqual(1, $intencaoVenda->getQuantidade());
+                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorOriginal());
+                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorAcrescimo());
+                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorDesconto());
+                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorFinal());
+                $this->assertNotEmpty($intencaoVenda->getFormaPagamento());
+                $this->assertInstanceOf(IntencaoVenda::class, $intencaoVenda);
+                $this->assertNotEmpty($intencaoVenda->getFormaPagamento());
+                $this->assertInstanceOf(FormaPagamento::class, $intencaoVenda->getFormaPagamento());
+                $this->assertNotEmpty($intencaoVenda->getFormaPagamento()->getFluxoPagamento());
+                $this->assertInstanceOf(FluxoPagamento::class, $intencaoVenda->getFormaPagamento()->getFluxoPagamento());
+                $this->assertNotEmpty($intencaoVenda->getTerminal());
+                $this->assertInstanceOf(Terminal::class, $intencaoVenda->getTerminal());
+                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
+                $this->assertInstanceOf(IntencaoVendaStatus::class, $intencaoVenda->getIntencaoVendaStatus());
+                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
+                $this->assertInstanceOf(IntencaoVendaStatus::class, $intencaoVenda->getIntencaoVendaStatus());
+                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
+                $this->assertInstanceOf(Pessoa::class, $intencaoVenda->getVendedor());
+                $this->assertNotEmpty($intencaoVenda->getVendedor());
+                break;
+            }
+
     }
 
 }

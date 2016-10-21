@@ -1,47 +1,29 @@
 <?php
 
-namespace Integracao\NTKOnline\Api;
+namespace Tests\Integracao\NTKOnline\Api;
 
-use Integracao\ControlPay\API\IntencaoVendaApi;
 use Integracao\ControlPay\API\PagamentoExternoApi;
 use Integracao\ControlPay\API\VenderApi;
-use Integracao\ControlPay\Constants\ControlPayParameter;
 use Integracao\ControlPay\Contracts\PagamentoExterno\GetByFiltrosRequest;
-use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 use Integracao\ControlPay\Model\FluxoPagamento;
 use Integracao\ControlPay\Model\FormaPagamento;
 use Integracao\ControlPay\Model\IntencaoVenda;
 use Integracao\ControlPay\Model\IntencaoVendaStatus;
 use Integracao\ControlPay\Model\Pessoa;
-use Integracao\ControlPay\Model\Terminal;
+use Tests\Integracao\ControlPay\PHPUnit;
 
 /**
  * Class PagamentoExternoApiTest
  * @package Integracao\NTKOnline\Api
  *
  */
-class PagamentoExternoApiTest extends \PHPUnit_Framework_TestCase
+class PagamentoExternoApiTest extends PHPUnit
 {
 
     /**
      * @var VenderApi
      */
     private $_intencaoVendaApi;
-
-    /**
-     * @var string
-     */
-    private $host;
-
-    /**
-     * @var string
-     */
-    private $user;
-
-    /**
-     * @var string
-     */
-    private $pwd;
 
     /**
      * @var integer
@@ -53,18 +35,8 @@ class PagamentoExternoApiTest extends \PHPUnit_Framework_TestCase
      */
     public function __construct()
     {
-        $this->host = getenv(ControlPayParameter::CONTROLPAY_HOST);
-        $this->user = getenv(ControlPayParameter::CONTROLPAY_USER);
-        $this->pwd = getenv(ControlPayParameter::CONTROLPAY_PWD);
-        $client = new \Integracao\ControlPay\Client([
-            ControlPayParameter::CONTROLPAY_HOST => $this->host,
-            ControlPayParameter::CONTROLPAY_TIMEOUT => 10,
-            ControlPayParameter::CONTROLPAY_OAUTH_TYPE => KeyQueryStringAuthentication::class,
-            ControlPayParameter::CONTROLPAY_USER => $this->user,
-            ControlPayParameter::CONTROLPAY_PWD => $this->pwd,
-        ]);
-
-        $this->_intencaoVendaApi = new PagamentoExternoApi($client);
+        parent::__construct();
+        $this->_intencaoVendaApi = new PagamentoExternoApi($this->client);
     }
 
     public function test_getByFiltros_status_pendente()
@@ -85,7 +57,7 @@ class PagamentoExternoApiTest extends \PHPUnit_Framework_TestCase
                 $this->assertNotEmpty($pagamentoExterno->getIntencoesVenda()->getData());
                 $this->assertInstanceOf(IntencaoVenda::class, $pagamentoExterno->getIntencoesVenda());
                 $this->assertInstanceOf(\DateTime::class, $pagamentoExterno->getIntencoesVenda()->getData());
-                $this->assertGreaterThanOrEqual(1, $pagamentoExterno->getIntencoesVenda()->getQuantidade());
+                $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getQuantidade());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorOriginal());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorAcrescimo());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorDesconto());
@@ -121,7 +93,7 @@ class PagamentoExternoApiTest extends \PHPUnit_Framework_TestCase
                 $this->assertNotEmpty($pagamentoExterno->getIntencoesVenda()->getData());
                 $this->assertInstanceOf(IntencaoVenda::class, $pagamentoExterno->getIntencoesVenda());
                 $this->assertInstanceOf(\DateTime::class, $pagamentoExterno->getIntencoesVenda()->getData());
-                $this->assertGreaterThanOrEqual(1, $pagamentoExterno->getIntencoesVenda()->getQuantidade());
+                $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getQuantidade());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorOriginal());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorAcrescimo());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorDesconto());
@@ -158,7 +130,7 @@ class PagamentoExternoApiTest extends \PHPUnit_Framework_TestCase
                 $this->assertNotEmpty($pagamentoExterno->getIntencoesVenda()->getData());
                 $this->assertInstanceOf(IntencaoVenda::class, $pagamentoExterno->getIntencoesVenda());
                 $this->assertInstanceOf(\DateTime::class, $pagamentoExterno->getIntencoesVenda()->getData());
-                $this->assertGreaterThanOrEqual(1, $pagamentoExterno->getIntencoesVenda()->getQuantidade());
+                $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getQuantidade());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorOriginal());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorAcrescimo());
                 $this->assertGreaterThanOrEqual(0, $pagamentoExterno->getIntencoesVenda()->getValorDesconto());

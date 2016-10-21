@@ -9,65 +9,40 @@ use Integracao\ControlPay\Helpers\SerializerHelper;
 use Integracao\ControlPay\Contracts;
 
 /**
- * Class IntencaoVendaApi
+ * Class TerminalApi
  * @package Integracao\ControlPay\API
  */
-class IntencaoVendaApi extends AbstractAPI
+class TerminalApi extends AbstractAPI
 {
 
     /**
-     * IntencaoVendaApi constructor.
+     * TerminalApi constructor.
      */
     public function __construct(Client $client = null)
     {
-        parent::__construct('intencaoVenda', $client);
+        parent::__construct('terminal', $client);
     }
 
     /**
-     * @param Contracts\IntencaoVenda\GetByFiltrosRequest $getByFiltrosRequest
-     * @return Contracts\IntencaoVenda\GetByFiltrosResponse
+     * @param integer $pessoaId
+     * @return Contracts\Terminal\GetByPessoaIdResponse
      * @throws \Exception
      */
-    public function getByFiltros(Contracts\IntencaoVenda\GetByFiltrosRequest $getByFiltrosRequest)
-    {
-        try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
-                'body' => json_encode($getByFiltrosRequest),
-            ]);
-
-            return SerializerHelper::denormalize(
-                $response->json(),
-                Contracts\IntencaoVenda\GetByFiltrosResponse::class
-            );
-        }catch (RequestException $ex) {
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
-        }catch (\Exception $ex){
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
-        }
-    }
-
-    /**
-     * @param integer $intencaoVendaId
-     * @return Contracts\IntencaoVenda\GetByFiltrosResponse
-     * @throws \Exception
-     */
-    public function getById($intencaoVendaId)
+    public function getByPessoaId($pessoaId)
     {
         try{
             $response = $this->_httpClient->post(__FUNCTION__,[
                 'query' => $this->addQueryAdditionalParameters([
-                    'intencaoVendaId' => $intencaoVendaId
+                    'pessoaId' => $pessoaId
                 ])
             ]);
 
             return SerializerHelper::denormalize(
                 $response->json(),
-                Contracts\IntencaoVenda\GetByIdResponse::class
+                Contracts\Terminal\GetByPessoaIdResponse::class
             );
         }catch (RequestException $ex) {
             $responseBody = $ex->getResponse()->json();
-            var_dump($responseBody);
             throw new \Exception($responseBody['message']);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
@@ -75,20 +50,46 @@ class IntencaoVendaApi extends AbstractAPI
     }
 
     /**
-     * @param Contracts\IntencaoVenda\GetByIntegracaoIdRequest $getByIntegracaoIdRequest
-     * @return Contracts\IntencaoVenda\GetByIntegracaoIdResponse
+     * @param integer $terminalId
+     * @return Contracts\Terminal\GetByIdResponse
      * @throws \Exception
      */
-    public function getByIntegracaoId(Contracts\IntencaoVenda\GetByIntegracaoIdRequest $getByIntegracaoIdRequest)
+    public function getById($terminalId)
     {
         try{
             $response = $this->_httpClient->post(__FUNCTION__,[
-                'body' => json_encode($getByIntegracaoIdRequest),
+                'query' => $this->addQueryAdditionalParameters([
+                    'terminalId' => $terminalId
+                ])
             ]);
 
             return SerializerHelper::denormalize(
                 $response->json(),
-                Contracts\IntencaoVenda\GetByIntegracaoIdResponse::class
+                Contracts\Terminal\GetByIdResponse::class
+            );
+        }catch (RequestException $ex) {
+            $responseBody = $ex->getResponse()->json();
+            throw new \Exception($responseBody['message']);
+        }catch (\Exception $ex){
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
+        }
+    }
+
+    /**
+     * @param Contracts\Terminal\InsertRequest $insertRequest
+     * @return Contracts\Terminal\GetByIdResponse
+     * @throws \Exception
+     */
+    public function insert(Contracts\Terminal\InsertRequest $insertRequest)
+    {
+        try{
+            $response = $this->_httpClient->post(__FUNCTION__,[
+                'body' => json_encode($insertRequest)
+            ]);
+
+            return SerializerHelper::denormalize(
+                $response->json(),
+                Contracts\Terminal\InsertResponse::class
             );
         }catch (RequestException $ex) {
             $responseBody = $ex->getResponse()->json();

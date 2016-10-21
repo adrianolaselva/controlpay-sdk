@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/Tests/Integracao/ControlPay/PHPUnit.php';
 
 $iniFile = __DIR__ . '/../config.ini';
 
@@ -11,3 +12,5 @@ if(is_file($iniFile))
         putenv("{$key}={$val}");
     }
 }
+
+

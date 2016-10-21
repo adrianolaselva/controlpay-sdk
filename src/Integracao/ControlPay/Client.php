@@ -4,6 +4,7 @@ namespace Integracao\ControlPay;
 use Integracao\ControlPay\Constants\ControlPayParameter;
 use Integracao\ControlPay\Factory\AuthenticationFactory;
 use Integracao\ControlPay\Impl\BasicAuthentication;
+use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 use Integracao\ControlPay\Interfaces\IAuthentication;
 
 /**
@@ -92,7 +93,8 @@ class Client
         $this->_params[ControlPayParameter::CONTROLPAY_TIMEOUT] = getenv('CONTROLPAY_TIMEOUT');
         $this->_params[ControlPayParameter::CONTROLPAY_USER] = getenv('CONTROLPAY_USER');
         $this->_params[ControlPayParameter::CONTROLPAY_PWD] = getenv('CONTROLPAY_PWD');
-        $this->_params[ControlPayParameter::CONTROLPAY_OAUTH_TYPE] = BasicAuthentication::class;
+        $this->_params[ControlPayParameter::CONTROLPAY_KEY] = getenv('CONTROLPAY_KEY');
+        $this->_params[ControlPayParameter::CONTROLPAY_OAUTH_TYPE] = KeyQueryStringAuthentication::class;
 
         if(!is_null($params))
             foreach ($params as $key => $param)
@@ -102,6 +104,7 @@ class Client
                     ControlPayParameter::CONTROLPAY_TIMEOUT,
                     ControlPayParameter::CONTROLPAY_USER,
                     ControlPayParameter::CONTROLPAY_PWD,
+                    ControlPayParameter::CONTROLPAY_KEY,
                     ControlPayParameter::CONTROLPAY_OAUTH_TYPE
                 ]))
                     throw new \Exception(sprintf("Parâmetro %s inválido", $key));
