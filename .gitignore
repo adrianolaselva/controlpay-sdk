@@ -1,4 +1,4 @@
-.dea/
+.idea/
 vendor/
 composer.lock
 config.ini
