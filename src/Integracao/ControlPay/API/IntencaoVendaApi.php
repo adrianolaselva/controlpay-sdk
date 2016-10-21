@@ -67,7 +67,6 @@ class IntencaoVendaApi extends AbstractAPI
             );
         }catch (RequestException $ex) {
             $responseBody = $ex->getResponse()->json();
-            var_dump($responseBody);
             throw new \Exception($responseBody['message']);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
