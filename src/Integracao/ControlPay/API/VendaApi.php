@@ -53,31 +53,33 @@ class VendaApi extends AbstractAPI
         }
     }
 
-    /**
-     * @return Contracts\Venda\ConsultarVendasResponse
-     * @throws \Exception
-     */
-    public function consultarVendas(array $ids = [])
-    {
-        try{
-            $response = $this->_httpClient->post(__FUNCTION__, [
-                'body' => json_encode(array_map(function($id){
-                    return [
-                        'Id' => (string)$id
-                    ];
-                },$ids))
-            ]);
-
-            return SerializerHelper::denormalize(
-                $response->json(),
-                Contracts\Venda\ConsultarVendasResponse::class
-            );
-        }catch (RequestException $ex) {
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
-        }catch (\Exception $ex){
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
-        }
-    }
+//    /**
+//     * API Provavelmente descontinuada
+//     *
+//     * @return Contracts\Venda\ConsultarVendasResponse
+//     * @throws \Exception
+//     */
+//    public function consultarVendas(array $ids = [])
+//    {
+//        try{
+//            $response = $this->_httpClient->post(__FUNCTION__, [
+//                'body' => json_encode(array_map(function($id){
+//                    return [
+//                        'Id' => (string)$id
+//                    ];
+//                },$ids))
+//            ]);
+//
+//            return SerializerHelper::denormalize(
+//                $response->json(),
+//                Contracts\Venda\ConsultarVendasResponse::class
+//            );
+//        }catch (RequestException $ex) {
+//            $responseBody = $ex->getResponse()->json();
+//            throw new \Exception($responseBody['message']);
+//        }catch (\Exception $ex){
+//            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
+//        }
+//    }
 
 }

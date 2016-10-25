@@ -73,28 +73,30 @@ class IntencaoVendaApi extends AbstractAPI
         }
     }
 
-    /**
-     * @param Contracts\IntencaoVenda\GetByIntegracaoIdRequest $getByIntegracaoIdRequest
-     * @return Contracts\IntencaoVenda\GetByIntegracaoIdResponse
-     * @throws \Exception
-     */
-    public function getByIntegracaoId(Contracts\IntencaoVenda\GetByIntegracaoIdRequest $getByIntegracaoIdRequest)
-    {
-        try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
-                'body' => json_encode($getByIntegracaoIdRequest),
-            ]);
-
-            return SerializerHelper::denormalize(
-                $response->json(),
-                Contracts\IntencaoVenda\GetByIntegracaoIdResponse::class
-            );
-        }catch (RequestException $ex) {
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
-        }catch (\Exception $ex){
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
-        }
-    }
+//    /**
+//     * API Provavelmente descontinuada
+//     *
+//     * @param Contracts\IntencaoVenda\GetByIntegracaoIdRequest $getByIntegracaoIdRequest
+//     * @return Contracts\IntencaoVenda\GetByIntegracaoIdResponse
+//     * @throws \Exception
+//     */
+//    public function getByIntegracaoId(Contracts\IntencaoVenda\GetByIntegracaoIdRequest $getByIntegracaoIdRequest)
+//    {
+//        try{
+//            $response = $this->_httpClient->post(__FUNCTION__,[
+//                'body' => json_encode($getByIntegracaoIdRequest),
+//            ]);
+//
+//            return SerializerHelper::denormalize(
+//                $response->json(),
+//                Contracts\IntencaoVenda\GetByIntegracaoIdResponse::class
+//            );
+//        }catch (RequestException $ex) {
+//            $responseBody = $ex->getResponse()->json();
+//            throw new \Exception($responseBody['message']);
+//        }catch (\Exception $ex){
+//            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
+//        }
+//    }
 
 }

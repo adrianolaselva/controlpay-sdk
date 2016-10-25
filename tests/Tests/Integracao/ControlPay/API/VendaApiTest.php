@@ -8,7 +8,6 @@ use Integracao\ControlPay\Model\FluxoPagamento;
 use Integracao\ControlPay\Model\FormaPagamento;
 use Integracao\ControlPay\Model\IntencaoVenda;
 use Integracao\ControlPay\Model\IntencaoVendaStatus;
-use Integracao\ControlPay\Model\Pessoa;
 use Integracao\ControlPay\Model\Produto;
 use Integracao\ControlPay\Model\Terminal;
 use Tests\Integracao\ControlPay\PHPUnit;
@@ -84,45 +83,48 @@ class VendaApiTest extends PHPUnit
         $this->assertNotEmpty($response->getIntencaoVenda()->getPagamentosExterno());
     }
 
-    public function test_consultarVendas()
-    {
-        $response = $this->_venderApi->consultarVendas([
-            1,2,3,4
-        ]);
-
-        $this->assertNotEmpty($response->getData());
-        $this->assertInstanceOf(\DateTime::class, $response->getData());
-        if(!empty($response->getIntencoesVendas()))
-            foreach ($response->getIntencoesVendas() as $intencaoVenda)
-            {
-                $this->assertNotEmpty($intencaoVenda->getId());
-                $this->id = $intencaoVenda->getId();
-                $this->assertNotEmpty($intencaoVenda->getToken());
-                $this->assertNotEmpty($intencaoVenda->getData());
-                $this->assertInstanceOf(\DateTime::class, $intencaoVenda->getData());
-                $this->assertGreaterThanOrEqual(1, $intencaoVenda->getQuantidade());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorOriginal());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorAcrescimo());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorDesconto());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorFinal());
-                $this->assertNotEmpty($intencaoVenda->getFormaPagamento());
-                $this->assertInstanceOf(IntencaoVenda::class, $intencaoVenda);
-                $this->assertNotEmpty($intencaoVenda->getFormaPagamento());
-                $this->assertInstanceOf(FormaPagamento::class, $intencaoVenda->getFormaPagamento());
-                $this->assertNotEmpty($intencaoVenda->getFormaPagamento()->getFluxoPagamento());
-                $this->assertInstanceOf(FluxoPagamento::class, $intencaoVenda->getFormaPagamento()->getFluxoPagamento());
-                $this->assertNotEmpty($intencaoVenda->getTerminal());
-                $this->assertInstanceOf(Terminal::class, $intencaoVenda->getTerminal());
-                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
-                $this->assertInstanceOf(IntencaoVendaStatus::class, $intencaoVenda->getIntencaoVendaStatus());
-                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
-                $this->assertInstanceOf(IntencaoVendaStatus::class, $intencaoVenda->getIntencaoVendaStatus());
-                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
-                $this->assertInstanceOf(Pessoa::class, $intencaoVenda->getVendedor());
-                $this->assertNotEmpty($intencaoVenda->getVendedor());
-                break;
-            }
-
-    }
+//    /**
+//     * API Provavelmente descontinuada
+//     */
+//    public function test_consultarVendas()
+//    {
+//        $response = $this->_venderApi->consultarVendas([
+//            1,2,3,4
+//        ]);
+//
+//        $this->assertNotEmpty($response->getData());
+//        $this->assertInstanceOf(\DateTime::class, $response->getData());
+//        if(!empty($response->getIntencoesVendas()))
+//            foreach ($response->getIntencoesVendas() as $intencaoVenda)
+//            {
+//                $this->assertNotEmpty($intencaoVenda->getId());
+//                $this->id = $intencaoVenda->getId();
+//                $this->assertNotEmpty($intencaoVenda->getToken());
+//                $this->assertNotEmpty($intencaoVenda->getData());
+//                $this->assertInstanceOf(\DateTime::class, $intencaoVenda->getData());
+//                $this->assertGreaterThanOrEqual(1, $intencaoVenda->getQuantidade());
+//                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorOriginal());
+//                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorAcrescimo());
+//                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorDesconto());
+//                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorFinal());
+//                $this->assertNotEmpty($intencaoVenda->getFormaPagamento());
+//                $this->assertInstanceOf(IntencaoVenda::class, $intencaoVenda);
+//                $this->assertNotEmpty($intencaoVenda->getFormaPagamento());
+//                $this->assertInstanceOf(FormaPagamento::class, $intencaoVenda->getFormaPagamento());
+//                $this->assertNotEmpty($intencaoVenda->getFormaPagamento()->getFluxoPagamento());
+//                $this->assertInstanceOf(FluxoPagamento::class, $intencaoVenda->getFormaPagamento()->getFluxoPagamento());
+//                $this->assertNotEmpty($intencaoVenda->getTerminal());
+//                $this->assertInstanceOf(Terminal::class, $intencaoVenda->getTerminal());
+//                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
+//                $this->assertInstanceOf(IntencaoVendaStatus::class, $intencaoVenda->getIntencaoVendaStatus());
+//                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
+//                $this->assertInstanceOf(IntencaoVendaStatus::class, $intencaoVenda->getIntencaoVendaStatus());
+//                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
+//                $this->assertInstanceOf(Pessoa::class, $intencaoVenda->getVendedor());
+//                $this->assertNotEmpty($intencaoVenda->getVendedor());
+//                break;
+//            }
+//
+//    }
 
 }

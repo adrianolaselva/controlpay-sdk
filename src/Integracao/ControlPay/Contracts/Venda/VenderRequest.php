@@ -1,6 +1,8 @@
 <?php
 
 namespace Integracao\ControlPay\Contracts\Venda;
+use Integracao\ControlPay\Helpers\SerializerHelper;
+use Integracao\ControlPay\Model\Produto;
 
 /**
  * Class VenderRequest
@@ -333,7 +335,10 @@ class VenderRequest implements \JsonSerializable
      */
     public function setProdutosVendidos($produtosVendidos)
     {
-        $this->produtosVendidos = $produtosVendidos;
+
+        foreach ($produtosVendidos as $produto)
+            $this->produtosVendidos[] = is_array($produto) ? SerializerHelper::denormalize($produto, Produto::class) : $produto;
+
         return $this;
     }
 
