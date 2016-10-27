@@ -3,6 +3,7 @@
 namespace Integracao\ControlPay\API;
 
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Message\ResponseInterface;
 use Integracao\ControlPay\AbstractAPI;
 use Integracao\ControlPay\Client;
 use Integracao\ControlPay\Helpers\SerializerHelper;
@@ -55,14 +56,14 @@ class IntencaoVendaApi extends AbstractAPI
     public function getById($intencaoVendaId)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'query' => $this->addQueryAdditionalParameters([
                     'intencaoVendaId' => $intencaoVendaId
                 ])
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\IntencaoVenda\GetByIdResponse::class
             );
         }catch (RequestException $ex) {

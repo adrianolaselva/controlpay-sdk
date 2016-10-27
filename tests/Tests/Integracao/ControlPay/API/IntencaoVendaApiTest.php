@@ -50,6 +50,8 @@ class IntencaoVendaApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
+        //$this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+
         if(!empty($response->getIntencoesVendas()))
             foreach ($response->getIntencoesVendas() as $intencaoVenda)
             {
@@ -91,6 +93,8 @@ class IntencaoVendaApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
+        //$this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+
         if(!empty($response->getIntencoesVendas()))
             foreach ($response->getIntencoesVendas() as $intencaoVenda)
             {
@@ -131,6 +135,7 @@ class IntencaoVendaApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
+        //$this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
 
         if(!empty($response->getIntencoesVendas()))
             foreach ($response->getIntencoesVendas() as $intencaoVenda)
@@ -169,6 +174,8 @@ class IntencaoVendaApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
+        //$this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+
         if(!empty($response->getIntencoesVendas()))
             foreach ($response->getIntencoesVendas() as $intencaoVenda)
             {
@@ -212,6 +219,8 @@ class IntencaoVendaApiTest extends PHPUnit
 //
 //        $this->assertNotEmpty($response->getData());
 //        $this->assertInstanceOf(\DateTime::class, $response->getData());
+//        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+//
 //        if(!empty($response->getIntencoesVendas()))
 //            foreach ($response->getIntencoesVendas() as $intencaoVenda)
 //            {

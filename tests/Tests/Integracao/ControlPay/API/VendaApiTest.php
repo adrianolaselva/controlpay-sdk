@@ -59,6 +59,7 @@ class VendaApiTest extends PHPUnit
                 ])
         );
 
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_venderApi->getResponse());
         $this->assertNotEmpty($response->getData());
         $this->assertNotEmpty($response->getIntencaoVenda()->getToken());
         $this->assertGreaterThanOrEqual(1, $response->getIntencaoVenda()->getQuantidade());
@@ -94,6 +95,8 @@ class VendaApiTest extends PHPUnit
 //
 //        $this->assertNotEmpty($response->getData());
 //        $this->assertInstanceOf(\DateTime::class, $response->getData());
+//        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_venderApi->getResponse());
+//
 //        if(!empty($response->getIntencoesVendas()))
 //            foreach ($response->getIntencoesVendas() as $intencaoVenda)
 //            {

@@ -37,12 +37,12 @@ class VendaApi extends AbstractAPI
     public function vender(Contracts\Venda\VenderRequest $venderRequest)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'body' => json_encode($venderRequest),
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\Venda\VenderResponse::class
             );
         }catch (RequestException $ex) {
@@ -62,7 +62,7 @@ class VendaApi extends AbstractAPI
 //    public function consultarVendas(array $ids = [])
 //    {
 //        try{
-//            $response = $this->_httpClient->post(__FUNCTION__, [
+//            $this->response = $this->_httpClient->post(__FUNCTION__, [
 //                'body' => json_encode(array_map(function($id){
 //                    return [
 //                        'Id' => (string)$id
@@ -71,7 +71,7 @@ class VendaApi extends AbstractAPI
 //            ]);
 //
 //            return SerializerHelper::denormalize(
-//                $response->json(),
+//                $this->response->json(),
 //                Contracts\Venda\ConsultarVendasResponse::class
 //            );
 //        }catch (RequestException $ex) {

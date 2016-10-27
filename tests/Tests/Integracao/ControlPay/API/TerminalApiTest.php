@@ -54,6 +54,7 @@ class TerminalApiTest extends PHPUnit
 
         );
 
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_terminalApi->getResponse());
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
         $this->assertNotEmpty($response->getTerminal());

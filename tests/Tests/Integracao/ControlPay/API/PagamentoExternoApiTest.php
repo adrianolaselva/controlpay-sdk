@@ -48,6 +48,8 @@ class PagamentoExternoApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+
         if(!empty($response->getPagamentosExterno()))
             foreach ($response->getPagamentosExterno() as $pagamentoExterno)
             {
@@ -84,6 +86,8 @@ class PagamentoExternoApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+
         if(!empty($response->getPagamentosExterno()))
             foreach ($response->getPagamentosExterno() as $pagamentoExterno)
             {
@@ -120,6 +124,7 @@ class PagamentoExternoApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
 
         if(!empty($response->getPagamentosExterno()))
             foreach ($response->getPagamentosExterno() as $pagamentoExterno)

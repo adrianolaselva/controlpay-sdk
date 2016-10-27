@@ -47,6 +47,7 @@ class ProdutoApiTest extends PHPUnit
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
         $this->assertNotEmpty($response->getProdutos());
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_produtoApi->getResponse());
 
         if(!empty($response->getProdutos()))
             foreach ($response->getProdutos() as $produto)

@@ -38,6 +38,11 @@ abstract class AbstractAPI
     protected $query;
 
     /**
+     * @var GuzzleHttp\Message\ResponseInterface
+     */
+    protected $response;
+
+    /**
      * @var array
      */
     protected $headers = [
@@ -107,6 +112,12 @@ abstract class AbstractAPI
         return $this->query;
     }
 
-
+    /**
+     * @return GuzzleHttp\Message\ResponseInterface
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
 
 }

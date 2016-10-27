@@ -32,12 +32,12 @@ class LoginApi extends AbstractAPI
     public function login(Contracts\Login\LoginRequest $loginRequest)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'body' => json_encode($loginRequest)
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\Login\LoginResponse::class
             );
         }catch (RequestException $ex) {
@@ -55,7 +55,7 @@ class LoginApi extends AbstractAPI
     public function logOut()
     {
         try{
-            $this->_httpClient->post(__FUNCTION__,[]);
+            $this->response = $this->_httpClient->post(__FUNCTION__,[]);
 
             return true;
         }catch (RequestException $ex) {
@@ -74,12 +74,12 @@ class LoginApi extends AbstractAPI
     public function consultaLogin(Contracts\Login\ConsultaLoginRequest $consultaLoginRequest)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'body' => json_encode($consultaLoginRequest)
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\Login\ConsultaLoginResponse::class
             );
         }catch (RequestException $ex) {

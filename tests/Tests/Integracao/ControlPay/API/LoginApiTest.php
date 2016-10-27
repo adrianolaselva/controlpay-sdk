@@ -38,6 +38,7 @@ class LoginApiTest extends PHPUnit
                 ->setSenha($this->pwd)
         );
 
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_loginApi->getResponse());
         $this->assertNotEmpty($response->getPessoa());
         $this->assertInstanceOf(Pessoa::class, $response->getPessoa());
         $this->assertNotEmpty($response->getPessoa()->getPessoaStatus());

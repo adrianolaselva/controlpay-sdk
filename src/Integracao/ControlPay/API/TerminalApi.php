@@ -31,14 +31,14 @@ class TerminalApi extends AbstractAPI
     public function getByPessoaId($pessoaId)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'query' => $this->addQueryAdditionalParameters([
                     'pessoaId' => $pessoaId
                 ])
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\Terminal\GetByPessoaIdResponse::class
             );
         }catch (RequestException $ex) {
@@ -57,14 +57,14 @@ class TerminalApi extends AbstractAPI
     public function getById($terminalId)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'query' => $this->addQueryAdditionalParameters([
                     'terminalId' => $terminalId
                 ])
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\Terminal\GetByIdResponse::class
             );
         }catch (RequestException $ex) {
@@ -83,12 +83,12 @@ class TerminalApi extends AbstractAPI
     public function insert(Contracts\Terminal\InsertRequest $insertRequest)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'body' => json_encode($insertRequest)
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\Terminal\InsertResponse::class
             );
         }catch (RequestException $ex) {

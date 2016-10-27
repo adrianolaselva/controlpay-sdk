@@ -31,14 +31,14 @@ class ProdutoApi extends AbstractAPI
     public function getByAtivosByPessoaId($pessoaId)
     {
         try{
-            $response = $this->_httpClient->get(__FUNCTION__,[
+            $this->response = $this->_httpClient->get(__FUNCTION__,[
                 'query' => $this->addQueryAdditionalParameters([
                     'pessoaId' => $pessoaId
                 ])
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\Produto\GetByAtivosByPessoaIdResponse::class
             );
         }catch (RequestException $ex) {

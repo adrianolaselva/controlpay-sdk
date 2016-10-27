@@ -31,12 +31,12 @@ class PagamentoExternoApi extends AbstractAPI
     public function getByFiltros(Contracts\PagamentoExterno\GetByFiltrosRequest $getByFiltrosRequest)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'body' => json_encode($getByFiltrosRequest),
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\PagamentoExterno\GetByFiltrosResponse::class
             );
         }catch (RequestException $ex) {
