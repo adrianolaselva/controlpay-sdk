@@ -17,9 +17,9 @@ class GetByIdResponse
     private $data;
 
     /**
-     * @var array
+     * @var IntencaoVenda
      */
-    private $intencoesVendas;
+    private $intencaoVenda;
 
     /**
      * GetByIdResponse constructor.
@@ -47,22 +47,23 @@ class GetByIdResponse
     }
 
     /**
-     * @return array
+     * @return IntencaoVenda
      */
-    public function getIntencoesVendas()
+    public function getIntencaoVenda()
     {
-        return $this->intencoesVendas;
+        return $this->intencaoVenda;
     }
 
     /**
-     * @param array $intencoesVendas
+     * @param IntencaoVenda $intencaoVenda
      * @return GetByIdResponse
      */
-    public function setIntencoesVendas($intencoesVendas)
+    public function setIntencaoVenda($intencaoVenda)
     {
+        $this->intencaoVenda = $intencaoVenda;
 
-        foreach ($intencoesVendas as $intencaoVenda)
-            $this->intencoesVendas[] = SerializerHelper::denormalize($intencaoVenda, IntencaoVenda::class);
+        if(is_array($this->intencaoVenda))
+            $this->intencaoVenda = SerializerHelper::denormalize($this->intencaoVenda, IntencaoVenda::class);
 
         return $this;
     }

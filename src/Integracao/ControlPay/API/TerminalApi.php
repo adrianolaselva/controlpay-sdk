@@ -68,6 +68,7 @@ class TerminalApi extends AbstractAPI
                 Contracts\Terminal\GetByIdResponse::class
             );
         }catch (RequestException $ex) {
+            $this->response = $ex->getResponse();
             $responseBody = $ex->getResponse()->json();
             throw new \Exception($responseBody['message']);
         }catch (\Exception $ex){
@@ -92,6 +93,7 @@ class TerminalApi extends AbstractAPI
                 Contracts\Terminal\InsertResponse::class
             );
         }catch (RequestException $ex) {
+            $this->response = $ex->getResponse();
             $responseBody = $ex->getResponse()->json();
             throw new \Exception($responseBody['message']);
         }catch (\Exception $ex){

@@ -50,7 +50,7 @@ class IntencaoVendaApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
-        //$this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
 
         if(!empty($response->getIntencoesVendas()))
             foreach ($response->getIntencoesVendas() as $intencaoVenda)
@@ -93,7 +93,7 @@ class IntencaoVendaApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
-        //$this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
 
         if(!empty($response->getIntencoesVendas()))
             foreach ($response->getIntencoesVendas() as $intencaoVenda)
@@ -135,7 +135,7 @@ class IntencaoVendaApiTest extends PHPUnit
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
-        //$this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
 
         if(!empty($response->getIntencoesVendas()))
             foreach ($response->getIntencoesVendas() as $intencaoVenda)
@@ -170,40 +170,33 @@ class IntencaoVendaApiTest extends PHPUnit
 
     public function test_getById()
     {
-        $response = $this->_intencaoVendaApi->getById(22274);
+        $response = $this->_intencaoVendaApi->getById(22571);
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
-        //$this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
-
-        if(!empty($response->getIntencoesVendas()))
-            foreach ($response->getIntencoesVendas() as $intencaoVenda)
-            {
-                $this->assertNotEmpty($intencaoVenda->getToken());
-                $this->assertNotEmpty($intencaoVenda->getData());
-                $this->assertInstanceOf(\DateTime::class, $intencaoVenda->getData());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getQuantidade());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorOriginal());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorAcrescimo());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorDesconto());
-                $this->assertGreaterThanOrEqual(0, $intencaoVenda->getValorFinal());
-                $this->assertNotEmpty($intencaoVenda->getFormaPagamento());
-                $this->assertInstanceOf(IntencaoVenda::class, $intencaoVenda);
-                $this->assertNotEmpty($intencaoVenda->getFormaPagamento());
-                $this->assertInstanceOf(FormaPagamento::class, $intencaoVenda->getFormaPagamento());
-                $this->assertNotEmpty($intencaoVenda->getFormaPagamento()->getFluxoPagamento());
-                $this->assertInstanceOf(FluxoPagamento::class, $intencaoVenda->getFormaPagamento()->getFluxoPagamento());
-                $this->assertNotEmpty($intencaoVenda->getTerminal());
-                $this->assertInstanceOf(Terminal::class, $intencaoVenda->getTerminal());
-                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
-                $this->assertInstanceOf(IntencaoVendaStatus::class, $intencaoVenda->getIntencaoVendaStatus());
-                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
-                $this->assertInstanceOf(IntencaoVendaStatus::class, $intencaoVenda->getIntencaoVendaStatus());
-                $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
-                $this->assertInstanceOf(Pessoa::class, $intencaoVenda->getVendedor());
-                $this->assertNotEmpty($intencaoVenda->getVendedor());
-                break;
-            }
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
+        
+        $this->assertNotEmpty($response->getIntencaoVenda()->getToken());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getData());
+        $this->assertInstanceOf(\DateTime::class, $response->getIntencaoVenda()->getData());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getQuantidade());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorOriginal());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorAcrescimo());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorDesconto());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorFinal());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento());
+        $this->assertInstanceOf(IntencaoVenda::class, $response->getIntencaoVenda());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento());
+        $this->assertInstanceOf(FormaPagamento::class, $response->getIntencaoVenda()->getFormaPagamento());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento()->getFluxoPagamento());
+        $this->assertInstanceOf(FluxoPagamento::class, $response->getIntencaoVenda()->getFormaPagamento()->getFluxoPagamento());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertInstanceOf(Pessoa::class, $response->getIntencaoVenda()->getVendedor());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getVendedor());
 
     }
 

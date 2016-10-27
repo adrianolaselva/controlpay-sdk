@@ -32,15 +32,41 @@ class IntencaoVendaApi extends AbstractAPI
     public function getByFiltros(Contracts\IntencaoVenda\GetByFiltrosRequest $getByFiltrosRequest)
     {
         try{
-            $response = $this->_httpClient->post(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'body' => json_encode($getByFiltrosRequest),
             ]);
 
             return SerializerHelper::denormalize(
-                $response->json(),
+                $this->response->json(),
                 Contracts\IntencaoVenda\GetByFiltrosResponse::class
             );
         }catch (RequestException $ex) {
+            $this->response = $ex->getResponse();
+            $responseBody = $ex->getResponse()->json();
+            throw new \Exception($responseBody['message']);
+        }catch (\Exception $ex){
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
+        }
+    }
+
+    /**
+     * @param Contracts\IntencaoVenda\GetByFiltrosRequest $getByFiltrosRequest
+     * @return Contracts\IntencaoVenda\GetByFiltrosResponse
+     * @throws \Exception
+     */
+    public function getByFiltrosAsync(Contracts\IntencaoVenda\GetByFiltrosRequest $getByFiltrosRequest)
+    {
+        try{
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
+                'body' => json_encode($getByFiltrosRequest),
+            ]);
+
+            return SerializerHelper::denormalize(
+                $this->response->json(),
+                Contracts\IntencaoVenda\GetByFiltrosResponse::class
+            );
+        }catch (RequestException $ex) {
+            $this->response = $ex->getResponse();
             $responseBody = $ex->getResponse()->json();
             throw new \Exception($responseBody['message']);
         }catch (\Exception $ex){
@@ -50,7 +76,7 @@ class IntencaoVendaApi extends AbstractAPI
 
     /**
      * @param integer $intencaoVendaId
-     * @return Contracts\IntencaoVenda\GetByFiltrosResponse
+     * @return Contracts\IntencaoVenda\GetByIdResponse
      * @throws \Exception
      */
     public function getById($intencaoVendaId)
@@ -67,6 +93,7 @@ class IntencaoVendaApi extends AbstractAPI
                 Contracts\IntencaoVenda\GetByIdResponse::class
             );
         }catch (RequestException $ex) {
+            $this->response = $ex->getResponse();
             $responseBody = $ex->getResponse()->json();
             throw new \Exception($responseBody['message']);
         }catch (\Exception $ex){
@@ -84,15 +111,16 @@ class IntencaoVendaApi extends AbstractAPI
 //    public function getByIntegracaoId(Contracts\IntencaoVenda\GetByIntegracaoIdRequest $getByIntegracaoIdRequest)
 //    {
 //        try{
-//            $response = $this->_httpClient->post(__FUNCTION__,[
+//            $this->response = $this->_httpClient->post(__FUNCTION__,[
 //                'body' => json_encode($getByIntegracaoIdRequest),
 //            ]);
 //
 //            return SerializerHelper::denormalize(
-//                $response->json(),
+//                $this->response->json(),
 //                Contracts\IntencaoVenda\GetByIntegracaoIdResponse::class
 //            );
 //        }catch (RequestException $ex) {
+//            $this->response = $ex->getResponse();
 //            $responseBody = $ex->getResponse()->json();
 //            throw new \Exception($responseBody['message']);
 //        }catch (\Exception $ex){
