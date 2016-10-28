@@ -18,7 +18,7 @@ abstract class AbstractAPI
     protected $_client;
 
     /**
-     * @var Curl
+     * @var GuzzleHttp\Client
      */
     protected $_httpClient;
 
@@ -118,6 +118,24 @@ abstract class AbstractAPI
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * @return array
+     */
+    public function getQueryParameters()
+    {
+        return isset($this->_httpClient->getDefaultOption()['query']) ?
+            $this->_httpClient->getDefaultOption()['query'] : [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return isset($this->_httpClient->getDefaultOption()['headers']) ?
+            $this->_httpClient->getDefaultOption()['headers'] : [];
     }
 
 }
