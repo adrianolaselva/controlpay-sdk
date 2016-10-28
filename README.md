@@ -31,7 +31,11 @@ $this->client = new \Integracao\ControlPay\Client([
     ControlPayParameterConst::CONTROLPAY_TIMEOUT => 10,
     ControlPayParameterConst::CONTROLPAY_USER => "",
     ControlPayParameterConst::CONTROLPAY_PWD => "",
-    ControlPayParameterConst::CONTROLPAY_KEY => ""
+    ControlPayParameterConst::CONTROLPAY_KEY => "",
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID => "",
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID => "",
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID => "",
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF => "",
 ]);
 
 $vendaApi = new VendaAPI($client);
@@ -47,9 +51,29 @@ $client->setParameter(ControlPayParameterConst::CONTROLPAY_USER, "");
 $client->setParameter(ControlPayParameterConst::CONTROLPAY_PWD, "");
 $client->setParameter(ControlPayParameterConst::CONTROLPAY_TIMEOUT, 10);
 $client->setParameter(ControlPayParameterConst::CONTROLPAY_KEY, "");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID, "");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID, "");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID, "");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF, "");
 
 $vendaApi = new VendaAPI($client);
 ```
+
+### Parâmetros
+
+    ControlPayParameterConst::CONTROLPAY_HOST => URL das apis do controlPay
+    ControlPayParameterConst::CONTROLPAY_TIMEOUT => Tempo de Timeout da requisição, como padrão o tempo é de 20 segundos
+    ControlPayParameterConst::CONTROLPAY_USER => Usuário de acesso ao controlPay
+    ControlPayParameterConst::CONTROLPAY_PWD => Senha de acesso ao controlPay
+    ControlPayParameterConst::CONTROLPAY_KEY => Chave de acesso ao controlPay
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID => Código do terminal que para acionamento do tef
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID => Código do produto padrão
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID => Código de forma de pagamento padrão
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF => Transacionar com tef
+
+Obs: Caso seja adicionado a "CONTROLPAY_KEY" no parâmetro, não será necessário os parâmetros "CONTROLPAY_USER" e 
+"CONTROLPAY_PWD", pois os mesmos são utilizados para gerar uma key para efetuar as requisições
+
 
 Para obter a versão configure seu composer.json conforme exemplo abaixo:
 
@@ -63,7 +87,7 @@ Para obter a versão configure seu composer.json conforme exemplo abaixo:
         }
     ],
     "require": {
-        "adrianolaselva/controlpay-sdk": "0.1.0"
+        "adrianolaselva/controlpay-sdk": "0.1.*"
     },
 	"prefer-stable" : true
 }
