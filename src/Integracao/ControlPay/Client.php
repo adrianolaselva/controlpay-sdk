@@ -1,7 +1,7 @@
 <?php
 namespace Integracao\ControlPay;
 
-use Integracao\ControlPay\Constants\ControlPayParameter;
+use Integracao\ControlPay\Constants\ControlPayParameterConst;
 use Integracao\ControlPay\Factory\AuthenticationFactory;
 use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 use Integracao\ControlPay\Interfaces\IAuthentication;
@@ -38,9 +38,9 @@ class Client
      * @var array
      */
     private $_params = [
-        ControlPayParameter::CONTROLPAY_HOST => self::CONTROLPAY_HOST_DEFAULT,
-        ControlPayParameter::CONTROLPAY_TIMEOUT => self::CONTROLPAY_TIMEOUT_DEFAULT,
-        ControlPayParameter::CONTROLPAY_OAUTH_TYPE => self::CONTROLPAY_OAUTH_TYPE_DEFAULT
+        ControlPayParameterConst::CONTROLPAY_HOST => self::CONTROLPAY_HOST_DEFAULT,
+        ControlPayParameterConst::CONTROLPAY_TIMEOUT => self::CONTROLPAY_TIMEOUT_DEFAULT,
+        ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE => self::CONTROLPAY_OAUTH_TYPE_DEFAULT
     ];
 
     /**
@@ -54,7 +54,7 @@ class Client
      * $params Configurações opcionais, caso não seja passado os parâmetros será
      * acatado as presentes na raiz "/controlpay-sdk/config.ini"
      *
-     * @param array[ControlPayParameter::{PARAM} => '', ...] $params
+     * @param array[ControlPayParameterConst::{PARAM} => '', ...] $params
      * @throws \Exception
      */
     public function __construct(array $params = null, IAuthentication $authentication = null)
@@ -96,23 +96,33 @@ class Client
      */
     private function loadParameters($params, IAuthentication $authentication = null)
     {
-        $this->_params[ControlPayParameter::CONTROLPAY_HOST] = getenv('CONTROLPAY_HOST');
-        $this->_params[ControlPayParameter::CONTROLPAY_TIMEOUT] = getenv('CONTROLPAY_TIMEOUT');
-        $this->_params[ControlPayParameter::CONTROLPAY_USER] = getenv('CONTROLPAY_USER');
-        $this->_params[ControlPayParameter::CONTROLPAY_PWD] = getenv('CONTROLPAY_PWD');
-        $this->_params[ControlPayParameter::CONTROLPAY_KEY] = getenv('CONTROLPAY_KEY');
-        $this->_params[ControlPayParameter::CONTROLPAY_OAUTH_TYPE] = KeyQueryStringAuthentication::class;
+        $this->_params[ControlPayParameterConst::CONTROLPAY_HOST] = getenv('CONTROLPAY_HOST');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_TIMEOUT] = getenv('CONTROLPAY_TIMEOUT');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_USER] = getenv('CONTROLPAY_USER');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_PWD] = getenv('CONTROLPAY_PWD');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_KEY] = getenv('CONTROLPAY_KEY');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_PESSOA_ID] = getenv('CONTROLPAY_DEFAULT_PESSOA_ID');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID] = getenv('CONTROLPAY_DEFAULT_TERMINAL_ID');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID] = getenv('CONTROLPAY_DEFAULT_PRODUTO_ID');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID] = getenv('CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF] = getenv('CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE] = KeyQueryStringAuthentication::class;
 
         if(!is_null($params))
             foreach ($params as $key => $param)
             {
                 if(!in_array($key, [
-                    ControlPayParameter::CONTROLPAY_HOST,
-                    ControlPayParameter::CONTROLPAY_TIMEOUT,
-                    ControlPayParameter::CONTROLPAY_USER,
-                    ControlPayParameter::CONTROLPAY_PWD,
-                    ControlPayParameter::CONTROLPAY_KEY,
-                    ControlPayParameter::CONTROLPAY_OAUTH_TYPE
+                    ControlPayParameterConst::CONTROLPAY_HOST,
+                    ControlPayParameterConst::CONTROLPAY_TIMEOUT,
+                    ControlPayParameterConst::CONTROLPAY_USER,
+                    ControlPayParameterConst::CONTROLPAY_PWD,
+                    ControlPayParameterConst::CONTROLPAY_KEY,
+                    ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE,
+                    ControlPayParameterConst::CONTROLPAY_DEFAULT_PESSOA_ID,
+                    ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID,
+                    ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID,
+                    ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID,
+                    ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF
                 ]))
                     throw new \Exception(sprintf("Parâmetro %s inválido", $key));
             }

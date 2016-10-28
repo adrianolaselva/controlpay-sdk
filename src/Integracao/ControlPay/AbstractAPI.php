@@ -2,7 +2,7 @@
 namespace Integracao\ControlPay;
 
 use GuzzleHttp;
-use Integracao\ControlPay\Constants\ControlPayParameter;
+use Integracao\ControlPay\Constants\ControlPayParameterConst;
 use Integracao\ControlPay\Impl\BasicAuthentication;
 use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 
@@ -66,7 +66,7 @@ abstract class AbstractAPI
         $this->query = new GuzzleHttp\Query();
         $this->query->setEncodingType(false);
 
-        switch ($this->_client->getParameter(ControlPayParameter::CONTROLPAY_OAUTH_TYPE))
+        switch ($this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE))
         {
             case KeyQueryStringAuthentication::class:
                 $this->query->set('key', $this->_client->getAuthentication());
@@ -81,10 +81,10 @@ abstract class AbstractAPI
 
         $this->_httpClient = new GuzzleHttp\Client([
             'base_url' => sprintf("%s/%s/",
-                $client->getParameter(ControlPayParameter::CONTROLPAY_HOST),
+                $client->getParameter(ControlPayParameterConst::CONTROLPAY_HOST),
                 $this->endpoint
             ),
-            'timeout' => $client->getParameter(ControlPayParameter::CONTROLPAY_TIMEOUT),
+            'timeout' => $client->getParameter(ControlPayParameterConst::CONTROLPAY_TIMEOUT),
             'verify' => false,
             'defaults' => [
                 'headers' => $this->headers,

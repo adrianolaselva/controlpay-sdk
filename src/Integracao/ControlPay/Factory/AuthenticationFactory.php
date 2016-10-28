@@ -3,7 +3,7 @@
 namespace Integracao\ControlPay\Factory;
 
 use Integracao\ControlPay\Client;
-use Integracao\ControlPay\Constants\ControlPayParameter;
+use Integracao\ControlPay\Constants\ControlPayParameterConst;
 use Integracao\ControlPay\Impl\BasicAuthentication;
 use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 use Integracao\ControlPay\Interfaces\IAuthentication;
@@ -21,24 +21,24 @@ class AuthenticationFactory
      */
     public static function getInstance(array $params, Client $client = null)
     {
-        if(!isset($params[ControlPayParameter::CONTROLPAY_OAUTH_TYPE]))
+        if(!isset($params[ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE]))
             throw new \Exception("Tipo de autenticação não especificado");
 
-        switch ($params[ControlPayParameter::CONTROLPAY_OAUTH_TYPE])
+        switch ($params[ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE])
         {
             case BasicAuthentication::class:
                 return new BasicAuthentication(
-                    isset($params[ControlPayParameter::CONTROLPAY_USER]) ?$params[ControlPayParameter::CONTROLPAY_USER] : null,
-                    isset($params[ControlPayParameter::CONTROLPAY_PWD]) ?$params[ControlPayParameter::CONTROLPAY_PWD] : null,
-                    isset($params[ControlPayParameter::CONTROLPAY_KEY]) ?$params[ControlPayParameter::CONTROLPAY_KEY] : null
+                    isset($params[ControlPayParameterConst::CONTROLPAY_USER]) ?$params[ControlPayParameterConst::CONTROLPAY_USER] : null,
+                    isset($params[ControlPayParameterConst::CONTROLPAY_PWD]) ?$params[ControlPayParameterConst::CONTROLPAY_PWD] : null,
+                    isset($params[ControlPayParameterConst::CONTROLPAY_KEY]) ?$params[ControlPayParameterConst::CONTROLPAY_KEY] : null
                 );
                 break;
             case KeyQueryStringAuthentication::class:
                 return new KeyQueryStringAuthentication(
-                    isset($params[ControlPayParameter::CONTROLPAY_USER]) ?$params[ControlPayParameter::CONTROLPAY_USER] : null,
-                    isset($params[ControlPayParameter::CONTROLPAY_PWD]) ?$params[ControlPayParameter::CONTROLPAY_PWD] : null,
-                    isset($params[ControlPayParameter::CONTROLPAY_KEY]) ?$params[ControlPayParameter::CONTROLPAY_KEY] : null,
-                    isset($params[ControlPayParameter::CONTROLPAY_PESSOAID]) ?$params[ControlPayParameter::CONTROLPAY_PESSOAID] : null,
+                    isset($params[ControlPayParameterConst::CONTROLPAY_USER]) ?$params[ControlPayParameterConst::CONTROLPAY_USER] : null,
+                    isset($params[ControlPayParameterConst::CONTROLPAY_PWD]) ?$params[ControlPayParameterConst::CONTROLPAY_PWD] : null,
+                    isset($params[ControlPayParameterConst::CONTROLPAY_KEY]) ?$params[ControlPayParameterConst::CONTROLPAY_KEY] : null,
+                    isset($params[ControlPayParameterConst::CONTROLPAY_DEFAULT_PESSOA_ID]) ?$params[ControlPayParameterConst::CONTROLPAY_DEFAULT_PESSOA_ID] : null,
                     $client
                 );
                 break;

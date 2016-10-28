@@ -175,7 +175,7 @@ class IntencaoVendaApiTest extends PHPUnit
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
         $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_intencaoVendaApi->getResponse());
-        
+
         $this->assertNotEmpty($response->getIntencaoVenda()->getToken());
         $this->assertNotEmpty($response->getIntencaoVenda()->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getIntencaoVenda()->getData());

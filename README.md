@@ -27,11 +27,11 @@ Para iniciar o uso os seguintes passos devem ser executados
 
 ```php
 $this->client = new \Integracao\ControlPay\Client([
-    ControlPayParameter::CONTROLPAY_HOST => "http://...",
-    ControlPayParameter::CONTROLPAY_TIMEOUT => 10,
-    ControlPayParameter::CONTROLPAY_USER => "",
-    ControlPayParameter::CONTROLPAY_PWD => "",
-    ControlPayParameter::CONTROLPAY_KEY => ""
+    ControlPayParameterConst::CONTROLPAY_HOST => "http://...",
+    ControlPayParameterConst::CONTROLPAY_TIMEOUT => 10,
+    ControlPayParameterConst::CONTROLPAY_USER => "",
+    ControlPayParameterConst::CONTROLPAY_PWD => "",
+    ControlPayParameterConst::CONTROLPAY_KEY => ""
 ]);
 
 $vendaApi = new VendaAPI($client);
@@ -42,11 +42,11 @@ $vendaApi = new VendaAPI($client);
 ```php
 $client = new \Integracao\ControlPay\Client();
 
-$client->setParameter(ControlPayParameter::CONTROLPAY_HOST, "http://...");
-$client->setParameter(ControlPayParameter::CONTROLPAY_USER, "");
-$client->setParameter(ControlPayParameter::CONTROLPAY_PWD, "");
-$client->setParameter(ControlPayParameter::CONTROLPAY_TIMEOUT, 10);
-$client->setParameter(ControlPayParameter::CONTROLPAY_KEY, "");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_HOST, "http://...");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_USER, "");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_PWD, "");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_TIMEOUT, 10);
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_KEY, "");
 
 $vendaApi = new VendaAPI($client);
 ```

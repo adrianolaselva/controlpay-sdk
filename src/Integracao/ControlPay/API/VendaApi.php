@@ -11,6 +11,7 @@ namespace Integracao\ControlPay\API;
 use GuzzleHttp\Exception\RequestException;
 use Integracao\ControlPay\AbstractAPI;
 use Integracao\ControlPay\Client;
+use Integracao\ControlPay\Constants\ControlPayParameterConst;
 use Integracao\ControlPay\Helpers\SerializerHelper;
 use Integracao\ControlPay\Contracts;
 
@@ -20,6 +21,10 @@ use Integracao\ControlPay\Contracts;
  */
 class VendaApi extends AbstractAPI
 {
+    /**
+     * @var PedidoApi
+     */
+    private $pedidoApi;
 
     /**
      * VenderApi constructor.
@@ -27,6 +32,7 @@ class VendaApi extends AbstractAPI
     public function __construct(Client $client = null)
     {
         parent::__construct('venda', $client);
+        $this->pedidoApi = new PedidoApi($client);
     }
 
     /**
@@ -37,6 +43,32 @@ class VendaApi extends AbstractAPI
     public function vender(Contracts\Venda\VenderRequest $venderRequest)
     {
         try{
+
+            if(empty($venderRequest->getTerminalId()))
+                $venderRequest->setTerminalId(
+                    $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID)
+                );
+
+            if(empty($venderRequest->getFormaPagamentoId()))
+                $venderRequest->setFormaPagamentoId(
+                    $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID)
+                );
+
+            if(empty($venderRequest->isAguardarTefIniciarTransacao()))
+                $venderRequest->setAguardarTefIniciarTransacao(
+                    boolval(
+                        $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF)
+                    )
+                );
+
+            foreach ($venderRequest->getProdutosVendidos() as $key => $produto)
+            {
+                if(empty($produto->getId()))
+                    $venderRequest->getProdutosVendidos()[$key]->setId(
+                        $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID)
+                    );
+            }
+
             $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'body' => json_encode($venderRequest),
             ]);
@@ -45,6 +77,33 @@ class VendaApi extends AbstractAPI
                 $this->response->json(),
                 Contracts\Venda\VenderResponse::class
             );
+        }catch (RequestException $ex) {
+            $this->response = $ex->getResponse();
+            $responseBody = $ex->getResponse()->json();
+            throw new \Exception($responseBody['message']);
+        }catch (\Exception $ex){
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
+        }
+    }
+
+    /**
+     * @param Contracts\Venda\VenderComPedidoRequest $venderComPedidoRequest
+     * @return Contracts\Venda\VenderResponse
+     * @throws \Exception
+     */
+    public function venderComPedido(Contracts\Venda\VenderComPedidoRequest $venderComPedidoRequest)
+    {
+        try{
+            $response = $this->pedidoApi->insert($venderComPedidoRequest->getPedidoInserirRequest());
+
+            if(empty($response->getPedido()->getId()))
+                throw new \Exception("Falha ao inserir pedido");
+
+            $venderComPedidoRequest->getInventarioVenderRequest()->setPedidoId(
+                $response->getPedido()->getId()
+            );
+
+            return $this->vender($venderComPedidoRequest->getInventarioVenderRequest());
         }catch (RequestException $ex) {
             $this->response = $ex->getResponse();
             $responseBody = $ex->getResponse()->json();

@@ -2,7 +2,7 @@
 
 namespace Tests\Integracao\ControlPay;
 
-use Integracao\ControlPay\Constants\ControlPayParameter;
+use Integracao\ControlPay\Constants\ControlPayParameterConst;
 use Integracao\ControlPay\Impl\KeyQueryStringAuthentication;
 
 /**
@@ -43,17 +43,17 @@ class PHPUnit extends \PHPUnit_Framework_TestCase
      */
     public function __construct()
     {
-        $this->host = getenv(ControlPayParameter::CONTROLPAY_HOST);
-        $this->user = getenv(ControlPayParameter::CONTROLPAY_USER);
-        $this->pwd = getenv(ControlPayParameter::CONTROLPAY_PWD);
-        $this->key = getenv(ControlPayParameter::CONTROLPAY_KEY);
+        $this->host = getenv(ControlPayParameterConst::CONTROLPAY_HOST);
+        $this->user = getenv(ControlPayParameterConst::CONTROLPAY_USER);
+        $this->pwd = getenv(ControlPayParameterConst::CONTROLPAY_PWD);
+        $this->key = getenv(ControlPayParameterConst::CONTROLPAY_KEY);
         $this->client = new \Integracao\ControlPay\Client([
-            ControlPayParameter::CONTROLPAY_HOST => $this->host,
-            ControlPayParameter::CONTROLPAY_TIMEOUT => 10,
-            ControlPayParameter::CONTROLPAY_OAUTH_TYPE => KeyQueryStringAuthentication::class,
-            ControlPayParameter::CONTROLPAY_USER => $this->user,
-            ControlPayParameter::CONTROLPAY_PWD => $this->pwd,
-            ControlPayParameter::CONTROLPAY_KEY => $this->key
+            ControlPayParameterConst::CONTROLPAY_HOST => $this->host,
+            ControlPayParameterConst::CONTROLPAY_TIMEOUT => 10,
+            ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE => KeyQueryStringAuthentication::class,
+            ControlPayParameterConst::CONTROLPAY_USER => $this->user,
+            ControlPayParameterConst::CONTROLPAY_PWD => $this->pwd,
+            ControlPayParameterConst::CONTROLPAY_KEY => $this->key
         ]);
     }
 }
