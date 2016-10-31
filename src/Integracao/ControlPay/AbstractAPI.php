@@ -145,9 +145,13 @@ abstract class AbstractAPI
      */
     protected function requestException(GuzzleHttp\Exception\RequestException $ex, $message = "Falha de requisição")
     {
-        if ($ex->hasResponse()) {
-            throw new \Exception(sprintf("%s \ncode => [%s] \nbody => [%s]", $message,
-                $ex->getResponse()->getStatusCode(), $ex->getResponse()->getBody()));
+        if ($ex->hasResponse())
+        {
+            throw new \Exception(sprintf("%s code => [%s] body => [%s]",
+                $message,
+                $ex->getResponse()->getStatusCode(),
+                $ex->getResponse()->getBody())
+            );
         }
 
         throw new \Exception($message, $ex->getCode(), $ex);
