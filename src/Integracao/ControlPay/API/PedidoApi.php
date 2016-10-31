@@ -49,9 +49,7 @@ class PedidoApi extends AbstractAPI
                 Pedido\InserirResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
@@ -74,9 +72,7 @@ class PedidoApi extends AbstractAPI
                 Pedido\GetByFiltrosResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
@@ -103,9 +99,7 @@ class PedidoApi extends AbstractAPI
                 Pedido\GetByPessoaIdByReferenciaResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
@@ -132,9 +126,7 @@ class PedidoApi extends AbstractAPI
                 Pedido\GetByPessoaIdByReferenciaResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
@@ -159,9 +151,7 @@ class PedidoApi extends AbstractAPI
                 Pedido\CancelarResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
@@ -186,9 +176,7 @@ class PedidoApi extends AbstractAPI
                 Pedido\GetByIdResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }

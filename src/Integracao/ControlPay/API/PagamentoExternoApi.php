@@ -40,9 +40,7 @@ class PagamentoExternoApi extends AbstractAPI
                 Contracts\PagamentoExterno\GetByFiltrosResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }

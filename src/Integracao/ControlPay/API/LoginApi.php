@@ -41,9 +41,7 @@ class LoginApi extends AbstractAPI
                 Contracts\Login\LoginResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
@@ -60,9 +58,7 @@ class LoginApi extends AbstractAPI
 
             return true;
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
@@ -85,9 +81,7 @@ class LoginApi extends AbstractAPI
                 Contracts\Login\ConsultaLoginResponse::class
             );
         }catch (RequestException $ex) {
-            $this->response = $ex->getResponse();
-            $responseBody = $ex->getResponse()->json();
-            throw new \Exception($responseBody['message']);
+            $this->requestException($ex);
         }catch (\Exception $ex){
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
         }
