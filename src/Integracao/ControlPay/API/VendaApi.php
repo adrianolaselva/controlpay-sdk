@@ -151,6 +151,7 @@ class VendaApi extends AbstractAPI
         }
     }
 
+
 //    /**
 //     * API Provavelmente descontinuada
 //     *
