@@ -35,7 +35,7 @@ $this->client = new \Integracao\ControlPay\Client([
     ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID => "",
     ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID => "",
     ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID => "",
-    ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF => "",
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_SENHA_TECNICA => "",
 ]);
 
 $vendaApi = new VendaAPI($client);
