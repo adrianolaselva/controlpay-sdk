@@ -109,6 +109,48 @@ class VendaApi extends AbstractAPI
         }
     }
 
+    /**
+     * @param Contracts\Venda\CancelarVendaRequest $cancelarVendaRequest
+     * @return Contracts\Venda\CancelarVendaResponse
+     * @throws \Exception
+     */
+    public function cancelarVenda(Contracts\Venda\CancelarVendaRequest $cancelarVendaRequest)
+    {
+        try{
+
+            if(empty($cancelarVendaRequest->getTerminalId()))
+                $cancelarVendaRequest->setTerminalId(
+                    $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID)
+                );
+
+            if(empty($cancelarVendaRequest->getSenhaTecnica()))
+                $cancelarVendaRequest->setSenhaTecnica(
+                    $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_SENHA_TECNICA)
+                );
+
+            if(empty($cancelarVendaRequest->isAguardarTefIniciarTransacao()))
+                $cancelarVendaRequest->setAguardarTefIniciarTransacao(
+                    boolval(
+                        $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF)
+                    )
+                );
+
+
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
+                'body' => json_encode($cancelarVendaRequest),
+            ]);
+
+            return SerializerHelper::denormalize(
+                $this->response->json(),
+                Contracts\Venda\CancelarVendaResponse::class
+            );
+        }catch (RequestException $ex) {
+            $this->requestException($ex);
+        }catch (\Exception $ex){
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
+        }
+    }
+
 //    /**
 //     * API Provavelmente descontinuada
 //     *

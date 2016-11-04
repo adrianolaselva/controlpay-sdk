@@ -4,6 +4,7 @@ namespace Tests\Integracao\NTKOnline\Api;
 
 use Integracao\ControlPay\API\VendaApi;
 use Integracao\ControlPay\Contracts\Pedido\InserirRequest;
+use Integracao\ControlPay\Contracts\Venda\CancelarVendaRequest;
 use Integracao\ControlPay\Contracts\Venda\VenderComPedidoRequest;
 use Integracao\ControlPay\Contracts\Venda\VenderRequest;
 use Integracao\ControlPay\Model\FluxoPagamento;
@@ -27,7 +28,25 @@ class VendaApiTest extends PHPUnit
      */
     private $_venderApi;
 
+    /**
+     * @var string
+     */
     private static $referencia;
+
+    /**
+     * @var string
+     */
+    private static $intencaoVendaId;
+
+    /**
+     * @var string
+     */
+    private static $terminalId;
+
+    /**
+     * @var string
+     */
+    private static $senhaTecnica;
 
     /**
      * UsuarioApi constructor.
@@ -37,6 +56,7 @@ class VendaApiTest extends PHPUnit
         parent::__construct();
         $this->_venderApi = new VendaApi($this->client);
         self::$referencia = rand(100000, 999999);
+        self::$terminalId = 59;
     }
 
     public function test_vender_semtef()
@@ -47,7 +67,7 @@ class VendaApiTest extends PHPUnit
                 ->setPessoaClienteId(null)
                 //->setFormaPagamentoId(21)
                 ->setPedidoId(null)
-                ->setTerminalId(null)
+                ->setTerminalId(self::$terminalId)
                 ->setIntegracaoId(null)
                 ->setValorTotalVendido(null)
                 ->setValorAcrescimo(null)
@@ -67,6 +87,7 @@ class VendaApiTest extends PHPUnit
         $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_venderApi->getResponse());
         $this->assertNotEmpty($response->getData());
         $this->assertNotEmpty($response->getIntencaoVenda()->getToken());
+        self::$intencaoVendaId = $response->getIntencaoVenda()->getId();
         $this->assertGreaterThanOrEqual(1, $response->getIntencaoVenda()->getQuantidade());
         $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorOriginal());
         $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorAcrescimo());
@@ -87,6 +108,39 @@ class VendaApiTest extends PHPUnit
         $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
         $this->assertNotEmpty($response->getIntencaoVenda()->getProdutos());
         $this->assertNotEmpty($response->getIntencaoVenda()->getPagamentosExterno());
+    }
+
+    public function test_cancelarVenda_semtef()
+    {
+        $response = $this->_venderApi->cancelarVenda(
+            (new CancelarVendaRequest())
+                ->setIntencaoVendaId(self::$intencaoVendaId)
+                ->setTerminalId(self::$terminalId)
+                ->setSenhaTecnica(self::$senhaTecnica)
+                ->setAguardarTefIniciarTransacao(false)
+
+        );
+
+        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_venderApi->getResponse());
+        $this->assertNotEmpty($response->getData());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getToken());
+        $this->assertGreaterThanOrEqual(1, $response->getIntencaoVenda()->getQuantidade());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorOriginal());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorAcrescimo());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorDesconto());
+        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorFinal());
+        $this->assertInstanceOf(\DateTime::class, $response->getData());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento());
+        $this->assertInstanceOf(IntencaoVenda::class, $response->getIntencaoVenda());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento());
+        $this->assertInstanceOf(FormaPagamento::class, $response->getIntencaoVenda()->getFormaPagamento());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento()->getFluxoPagamento());
+        $this->assertInstanceOf(FluxoPagamento::class, $response->getIntencaoVenda()->getFormaPagamento()->getFluxoPagamento());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
+        $this->assertNotEmpty($response->getIntencaoVenda()->getProdutos());
     }
 
 //    public function test_vender_com_pedido()

@@ -55,6 +55,7 @@ $client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID, 
 $client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID, "");
 $client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID, "");
 $client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF, "");
+$client->setParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_SENHA_TECNICA, "");
 
 $vendaApi = new VendaAPI($client);
 ```
@@ -70,6 +71,7 @@ $vendaApi = new VendaAPI($client);
     ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID => Código do produto padrão
     ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID => Código de forma de pagamento padrão
     ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF => Transacionar com tef
+    ControlPayParameterConst::CONTROLPAY_DEFAULT_SENHA_TECNICA => Senha técnica para cancelamento de transação, aconselhável que ela não seja fixada no arquivo de configurações
 
 Obs: Caso seja adicionado a "CONTROLPAY_KEY" no parâmetro, não será necessário os parâmetros "CONTROLPAY_USER" e 
 "CONTROLPAY_PWD", pois os mesmos são utilizados para gerar uma key para efetuar as requisições
