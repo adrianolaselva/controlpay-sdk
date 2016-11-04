@@ -81,7 +81,7 @@ class VendaApiTest extends PHPUnit
                 ->setValorAcrescimo(null)
                 ->setValorDesconto(null)
                 ->setObservacao(null)
-                ->setAguardarTefIniciarTransacao(false) //Aciona TEF
+                //->setAguardarTefIniciarTransacao(false) //Aciona TEF
                 ->setParcelamentoAdmin(null)
                 ->setQuantidadeParcelas(null)
                 ->setProdutosVendidos([
@@ -126,7 +126,7 @@ class VendaApiTest extends PHPUnit
                 ->setIntencaoVendaId(self::$intencaoVendaId)
                 ->setTerminalId(self::$terminalId)
                 ->setSenhaTecnica(self::$senhaTecnica)
-                ->setAguardarTefIniciarTransacao(false)
+                //->setAguardarTefIniciarTransacao(false)
         );
 
         $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_venderApi->getResponse());
