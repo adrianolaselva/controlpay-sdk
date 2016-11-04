@@ -121,7 +121,6 @@ class PedidoApiTest extends PHPUnit
                 $this->assertNotEmpty($pedido->getHora());
                 $this->assertNotEmpty($pedido->getTipo());
                 $this->assertNotEmpty($pedido->getQuantidade());
-                $this->assertNotEmpty($pedido->getReferencia());
                 $this->assertGreaterThanOrEqual(0, $pedido->getValor());
                 $this->assertGreaterThanOrEqual(0, $pedido->getValorAberto());
                 $this->assertGreaterThanOrEqual(0, $pedido->getValorOriginalEmPagamento());
@@ -140,7 +139,6 @@ class PedidoApiTest extends PHPUnit
                         break;
                     }
             }
-
     }
 
     public function test_GetByPessoaIdByReferencia()
@@ -200,7 +198,6 @@ class PedidoApiTest extends PHPUnit
                 $this->assertNotEmpty($pedido->getHora());
                 $this->assertNotEmpty($pedido->getTipo());
                 $this->assertNotEmpty($pedido->getQuantidade());
-                $this->assertNotEmpty($pedido->getReferencia());
                 $this->assertGreaterThanOrEqual(0, $pedido->getValor());
                 $this->assertGreaterThanOrEqual(0, $pedido->getValorAberto());
                 $this->assertGreaterThanOrEqual(0, $pedido->getValorOriginalEmPagamento());

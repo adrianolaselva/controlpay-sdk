@@ -48,29 +48,6 @@ class IntencaoVendaApi extends AbstractAPI
     }
 
     /**
-     * @param Contracts\IntencaoVenda\GetByFiltrosRequest $getByFiltrosRequest
-     * @return Contracts\IntencaoVenda\GetByFiltrosResponse
-     * @throws \Exception
-     */
-    public function getByFiltrosAsync(Contracts\IntencaoVenda\GetByFiltrosRequest $getByFiltrosRequest)
-    {
-        try{
-            $this->response = $this->_httpClient->post(__FUNCTION__,[
-                'body' => json_encode($getByFiltrosRequest),
-            ]);
-
-            return SerializerHelper::denormalize(
-                $this->response->json(),
-                Contracts\IntencaoVenda\GetByFiltrosResponse::class
-            );
-        }catch (RequestException $ex) {
-            $this->requestException($ex);
-        }catch (\Exception $ex){
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex);
-        }
-    }
-
-    /**
      * @param integer $intencaoVendaId
      * @return Contracts\IntencaoVenda\GetByIdResponse
      * @throws \Exception

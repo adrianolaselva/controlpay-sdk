@@ -88,7 +88,7 @@ class IntencaoVendaApiTest extends PHPUnit
     {
         $response = $this->_intencaoVendaApi->getByFiltros(
             (new GetByFiltrosRequest())
-                ->setIntegracaoId($this->id)
+                ->setIntencaoVendaId($this->id)
         );
 
         $this->assertNotEmpty($response->getData());
@@ -197,7 +197,6 @@ class IntencaoVendaApiTest extends PHPUnit
         $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
         $this->assertInstanceOf(Pessoa::class, $response->getIntencaoVenda()->getVendedor());
         $this->assertNotEmpty($response->getIntencaoVenda()->getVendedor());
-
     }
 
 //    /**

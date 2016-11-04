@@ -14,6 +14,11 @@ class CancelarVendaRequest implements \JsonSerializable
     private $intencaoVendaId;
 
     /**
+     * @var string
+     */
+    private $referencia;
+
+    /**
      * @var integer
      */
     private $terminalId;
@@ -101,6 +106,24 @@ class CancelarVendaRequest implements \JsonSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getReferencia()
+    {
+        return $this->referencia;
+    }
+
+    /**
+     * @param string $referencia
+     * @return CancelarVendaRequest
+     */
+    public function setReferencia($referencia)
+    {
+        $this->referencia = $referencia;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     function jsonSerialize()
@@ -109,7 +132,8 @@ class CancelarVendaRequest implements \JsonSerializable
             'intencaoVendaId' => $this->intencaoVendaId,
             'terminalId' => $this->terminalId,
             'aguardarTefIniciarTransacao' => $this->aguardarTefIniciarTransacao,
-            'senhaTecnica' => $this->senhaTecnica
+            'senhaTecnica' => $this->senhaTecnica,
+            'referencia' => $this->referencia
         ];
     }
 

@@ -34,9 +34,9 @@ class GetByFiltrosRequest implements \JsonSerializable
     private $vendasDia;
 
     /**
-     * @var integer
+     * @var string
      */
-    private $integracaoId;
+    private $referencia;
 
     /**
      * GetByFiltrosRequest constructor.
@@ -136,20 +136,20 @@ class GetByFiltrosRequest implements \JsonSerializable
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIntegracaoId()
+    public function getReferencia()
     {
-        return $this->integracaoId;
+        return $this->referencia;
     }
 
     /**
-     * @param int $integracaoId
+     * @param string $referencia
      * @return GetByFiltrosRequest
      */
-    public function setIntegracaoId($integracaoId)
+    public function setReferencia($referencia)
     {
-        $this->integracaoId = $integracaoId;
+        $this->referencia = $referencia;
         return $this;
     }
 
@@ -164,7 +164,7 @@ class GetByFiltrosRequest implements \JsonSerializable
             "terminalId" => $this->terminalId,
             "status" => $this->status,
             "vendasDia" => $this->vendasDia,
-            "integracaoId" => $this->integracaoId,
+            "referencia" => $this->referencia,
         ];
     }
 

@@ -67,7 +67,7 @@ class IntencaoVenda implements \JsonSerializable
     /**
      * @var string
      */
-    private $integracaoId;
+    private $referencia;
 
     /**
      * @var string
@@ -400,18 +400,18 @@ class IntencaoVenda implements \JsonSerializable
     /**
      * @return string
      */
-    public function getIntegracaoId()
+    public function getReferencia()
     {
-        return $this->integracaoId;
+        return $this->referencia;
     }
 
     /**
-     * @param string $integracaoId
+     * @param string $referencia
      * @return IntencaoVenda
      */
-    public function setIntegracaoId($integracaoId)
+    public function setReferencia($referencia)
     {
-        $this->integracaoId = $integracaoId;
+        $this->referencia = $referencia;
         return $this;
     }
 
@@ -854,7 +854,7 @@ class IntencaoVenda implements \JsonSerializable
             'data' => $this->data,
             'formaPagamento' => $this->formaPagamento,
             'gate2allToken' => $this->gate2allToken,
-            'integracaoId' => $this->integracaoId,
+            'referencia' => $this->referencia,
             'intencaoVendaStatus' => $this->intencaoVendaStatus,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,

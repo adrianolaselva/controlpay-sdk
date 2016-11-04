@@ -36,9 +36,9 @@ class VenderRequest implements \JsonSerializable
     private $pedidoId;
 
     /**
-     * @var integer
+     * @var string
      */
-    private $integracaoId;
+    private $referencia;
 
     /**
      * @var double
@@ -178,20 +178,20 @@ class VenderRequest implements \JsonSerializable
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIntegracaoId()
+    public function getReferencia()
     {
-        return $this->integracaoId;
+        return $this->referencia;
     }
 
     /**
-     * @param int $integracaoId
-     * @return Venda
+     * @param string $referencia
+     * @return VenderRequest
      */
-    public function setIntegracaoId($integracaoId)
+    public function setReferencia($referencia)
     {
-        $this->integracaoId = $integracaoId;
+        $this->referencia = $referencia;
         return $this;
     }
 
@@ -350,7 +350,7 @@ class VenderRequest implements \JsonSerializable
             "formaPagamentoId" => $this->formaPagamentoId,
             "pedidoId" => $this->pedidoId,
             "terminalId" => $this->terminalId,
-            "integracaoId" => $this->integracaoId,
+            "referencia" => $this->referencia,
             "valorTotalVendido" => $this->valorTotalVendido,
             "valorAcrescimo" => $this->valorAcrescimo,
             "valorDesconto" => $this->valorDesconto,
