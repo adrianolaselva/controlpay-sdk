@@ -102,12 +102,14 @@ class Client
         $this->_params[ControlPayParameterConst::CONTROLPAY_PWD] = getenv('CONTROLPAY_PWD');
         $this->_params[ControlPayParameterConst::CONTROLPAY_KEY] = getenv('CONTROLPAY_KEY');
         $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_PESSOA_ID] = getenv('CONTROLPAY_DEFAULT_PESSOA_ID');
+        $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_QTDE] = getenv('CONTROLPAY_DEFAULT_PRODUTO_QTDE');
         $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID] = getenv('CONTROLPAY_DEFAULT_TERMINAL_ID');
         $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID] = getenv('CONTROLPAY_DEFAULT_PRODUTO_ID');
         $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID] = getenv('CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID');
         $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF] = getenv('CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF');
         $this->_params[ControlPayParameterConst::CONTROLPAY_DEFAULT_SENHA_TECNICA] = getenv('CONTROLPAY_DEFAULT_SENHA_TECNICA');
         $this->_params[ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE] = KeyQueryStringAuthentication::class;
+
 
         if(!is_null($params))
             foreach ($params as $key => $param)
@@ -122,6 +124,7 @@ class Client
                     ControlPayParameterConst::CONTROLPAY_DEFAULT_PESSOA_ID,
                     ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID,
                     ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID,
+                    ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_QTDE,
                     ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID,
                     ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_AGUARDA_TEF,
                     ControlPayParameterConst::CONTROLPAY_DEFAULT_SENHA_TECNICA

@@ -67,6 +67,11 @@ class VendaApi extends AbstractAPI
                     $venderRequest->getProdutosVendidos()[$key]->setId(
                         $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID)
                     );
+
+                if(empty($produto->getQuantidade()))
+                    $venderRequest->getProdutosVendidos()[$key]->setQuantidade(
+                        $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_QTDE)
+                    );
             }
 
             $this->response = $this->_httpClient->post(__FUNCTION__,[

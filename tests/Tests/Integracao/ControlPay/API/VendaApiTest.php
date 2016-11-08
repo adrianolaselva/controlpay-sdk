@@ -88,7 +88,7 @@ class VendaApiTest extends PHPUnit
                     (new Produto())
                         //->setId(41)
                         ->setValor(12.00)
-                        ->setQuantidade(1)
+                        //->setQuantidade(1)
                 ])
         );
 

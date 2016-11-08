@@ -53,7 +53,8 @@ class PHPUnit extends \PHPUnit_Framework_TestCase
             ControlPayParameterConst::CONTROLPAY_OAUTH_TYPE => KeyQueryStringAuthentication::class,
             ControlPayParameterConst::CONTROLPAY_USER => $this->user,
             ControlPayParameterConst::CONTROLPAY_PWD => $this->pwd,
-            ControlPayParameterConst::CONTROLPAY_KEY => $this->key
+            ControlPayParameterConst::CONTROLPAY_KEY => $this->key,
+            ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_QTDE => 1
         ]);
     }
 }
