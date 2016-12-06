@@ -90,7 +90,7 @@ class IntencaoVendaApiTest extends PHPUnit
                 $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getDataAdquirente());
                 $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getRespostaAdquirente());
                 $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getComprovanteAdquirente());
-                
+
                 break;
             }
     }
