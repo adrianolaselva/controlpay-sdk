@@ -90,11 +90,6 @@ class PagamentoExterno implements \JsonSerializable
     private $comprovanteAdquirente;
 
     /**
-     * @var array
-     */
-    private $comprovanteAdquirenteLinhas;
-
-    /**
      * PagamentoExterno constructor.
      */
     public function __construct()
@@ -384,7 +379,7 @@ class PagamentoExterno implements \JsonSerializable
      */
     public function setRespostaAdquirente($respostaAdquirente)
     {
-        $this->respostaAdquirente = $respostaAdquirente;
+        $this->respostaAdquirente = explode(PHP_EOL, $respostaAdquirente);
         return $this;
     }
 
@@ -402,31 +397,7 @@ class PagamentoExterno implements \JsonSerializable
      */
     public function setComprovanteAdquirente($comprovanteAdquirente)
     {
-        $this->comprovanteAdquirente = $comprovanteAdquirente;
-
-        /**
-         * Divide comprovante en linhas para facilitar uso
-         */
-        $this->comprovanteAdquirenteLinhas = explode(PHP_EOL, $comprovanteAdquirente);
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getComprovanteAdquirenteLinhas()
-    {
-        return $this->comprovanteAdquirenteLinhas;
-    }
-
-    /**
-     * @param array $comprovanteAdquirenteLinhas
-     * @return PagamentoExterno
-     */
-    public function setComprovanteAdquirenteLinhas($comprovanteAdquirenteLinhas)
-    {
-        $this->comprovanteAdquirenteLinhas = $comprovanteAdquirenteLinhas;
+        $this->comprovanteAdquirente = explode(PHP_EOL, $comprovanteAdquirente);
         return $this;
     }
 
