@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests\Integracao\NTKOnline\Api;
+namespace Tests\Integracao\ControlPay\API;
 
+use Integracao\ControlPay\API\IntencaoVendaApi;
 use Integracao\ControlPay\API\ProdutoApi;
 use Integracao\ControlPay\API\VenderApi;
 use Integracao\ControlPay\Contracts\PagamentoExterno\GetByFiltrosRequest;
@@ -27,9 +28,14 @@ class ProdutoApiTest extends PHPUnit
     private $_produtoApi;
 
     /**
+     * @var IntencaoVendaApi
+     */
+    private $_intencaoVendaApi;
+
+    /**
      * @var integer
      */
-    private $id;
+    private static $id;
 
     /**
      * UsuarioApi constructor.
@@ -38,11 +44,12 @@ class ProdutoApiTest extends PHPUnit
     {
         parent::__construct();
         $this->_produtoApi = new ProdutoApi($this->client);
+        $this->_intencaoVendaApi = new IntencaoVendaApi($this->client);
     }
 
     public function test_getByAtivosByPessoaId()
     {
-        $response = $this->_produtoApi->getByAtivosByPessoaId(7343);
+        $response = $this->_produtoApi->getByAtivosByPessoaId(112);
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());
@@ -53,7 +60,7 @@ class ProdutoApiTest extends PHPUnit
             foreach ($response->getProdutos() as $produto)
             {
                 $this->assertNotEmpty($produto->getId());
-                $this->id = $produto->getId();
+                self::$id = $produto->getId();
                 $this->assertNotEmpty($produto->getDescricao());
                 $this->assertInstanceOf(ProdutoStatus::class, $produto->getProdutoStatus());
                 break;

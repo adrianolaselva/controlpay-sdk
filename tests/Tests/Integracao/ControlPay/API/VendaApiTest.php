@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integracao\NTKOnline\Api;
+namespace Tests\Integracao\ControlPay\API;
 
 use Integracao\ControlPay\API\IntencaoVendaApi;
 use Integracao\ControlPay\API\VendaApi;
@@ -76,7 +76,7 @@ class VendaApiTest extends PHPUnit
                 ->setPessoaClienteId(null)
                 //->setFormaPagamentoId(21)
                 ->setPedidoId(null)
-                ->setTerminalId(self::$terminalId)
+                //->setTerminalId(self::$terminalId)
                 ->setValorTotalVendido(null)
                 ->setValorAcrescimo(null)
                 ->setValorDesconto(null)
@@ -124,7 +124,7 @@ class VendaApiTest extends PHPUnit
             (new CancelarVendaRequest())
                 ->setReferencia(self::$referencia)
                 ->setIntencaoVendaId(self::$intencaoVendaId)
-                ->setTerminalId(self::$terminalId)
+                //->setTerminalId(self::$terminalId)
                 ->setSenhaTecnica(self::$senhaTecnica)
                 //->setAguardarTefIniciarTransacao(false)
         );

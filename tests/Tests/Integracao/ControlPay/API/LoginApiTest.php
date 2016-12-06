@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integracao\NTKOnline\Api;
+namespace Tests\Integracao\ControlPay\API;
 
 use Integracao\ControlPay\API\LoginApi;
 use Integracao\ControlPay\Contracts\Login\ConsultaLoginRequest;

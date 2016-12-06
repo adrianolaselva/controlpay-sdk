@@ -31,7 +31,7 @@ class ProdutoApi extends AbstractAPI
     public function getByAtivosByPessoaId($pessoaId)
     {
         try{
-            $this->response = $this->_httpClient->get(__FUNCTION__,[
+            $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'query' => $this->addQueryAdditionalParameters([
                     'pessoaId' => $pessoaId
                 ])

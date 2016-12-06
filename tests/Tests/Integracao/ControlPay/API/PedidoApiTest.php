@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integracao\NTKOnline\Api;
+namespace Tests\Integracao\ControlPay\API;
 
 use Integracao\ControlPay\API\PedidoApi;
 use Integracao\ControlPay\Contracts\Pedido\GetByFiltrosRequest;
@@ -56,7 +56,7 @@ class PedidoApiTest extends PHPUnit
                 ->setValorTotalPedido(20.00)
                 ->setProdutosPedido([
                     (new Produto())
-                        ->setId(41)
+                        //->setId(41)
                         ->setValor(20.00)
                         ->setQuantidade(1)
                 ])
@@ -141,7 +141,7 @@ class PedidoApiTest extends PHPUnit
             }
     }
 
-    public function test_GetByPessoaIdByReferencia()
+    public function test_getByPessoaIdByReferencia()
     {
         $response = $this->_pedidoApi->getByPessoaIdByReferencia(self::$pessoaId, self::$referencia);
 

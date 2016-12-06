@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integracao\NTKOnline\Api;
+namespace Tests\Integracao\ControlPay\API;
 
 use Integracao\ControlPay\API\IntencaoVendaApi;
 use Integracao\ControlPay\Contracts\IntencaoVenda\GetByFiltrosRequest;
@@ -9,6 +9,7 @@ use Integracao\ControlPay\Model\FluxoPagamento;
 use Integracao\ControlPay\Model\FormaPagamento;
 use Integracao\ControlPay\Model\IntencaoVenda;
 use Integracao\ControlPay\Model\IntencaoVendaStatus;
+use Integracao\ControlPay\Model\PagamentoExterno;
 use Integracao\ControlPay\Model\Pessoa;
 use Integracao\ControlPay\Model\Terminal;
 use Tests\Integracao\ControlPay\PHPUnit;
@@ -29,7 +30,7 @@ class IntencaoVendaApiTest extends PHPUnit
     /**
      * @var integer
      */
-    private $id;
+    private static $id;
 
 
     /**
@@ -45,7 +46,7 @@ class IntencaoVendaApiTest extends PHPUnit
     {
         $response = $this->_intencaoVendaApi->getByFiltros(
             (new GetByFiltrosRequest())
-                ->setStatus("Pendente,15")
+                ->setStatus("10")
         );
 
         $this->assertNotEmpty($response->getData());
@@ -56,7 +57,7 @@ class IntencaoVendaApiTest extends PHPUnit
             foreach ($response->getIntencoesVendas() as $intencaoVenda)
             {
                 $this->assertNotEmpty($intencaoVenda->getId());
-                $this->id = $intencaoVenda->getId();
+                self::$id = $intencaoVenda->getId();
                 $this->assertNotEmpty($intencaoVenda->getToken());
                 $this->assertNotEmpty($intencaoVenda->getData());
                 $this->assertInstanceOf(\DateTime::class, $intencaoVenda->getData());
@@ -80,6 +81,17 @@ class IntencaoVendaApiTest extends PHPUnit
                 $this->assertNotEmpty($intencaoVenda->getIntencaoVendaStatus());
                 $this->assertInstanceOf(Pessoa::class, $intencaoVenda->getVendedor());
                 $this->assertNotEmpty($intencaoVenda->getVendedor());
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos());
+                $this->assertInstanceOf(PagamentoExterno::class, $intencaoVenda->getPagamentosExternos()[0]);
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getId());
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getNsuTid());
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getAutorizacao());
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getMensagemRespostaAdquirente());
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getDataAdquirente());
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getRespostaAdquirente());
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getComprovanteAdquirente());
+                $this->assertNotEmpty($intencaoVenda->getPagamentosExternos()[0]->getComprovanteAdquirenteLinhas());
+
                 break;
             }
     }
@@ -88,7 +100,7 @@ class IntencaoVendaApiTest extends PHPUnit
     {
         $response = $this->_intencaoVendaApi->getByFiltros(
             (new GetByFiltrosRequest())
-                ->setIntencaoVendaId($this->id)
+                ->setIntencaoVendaId(self::$id)
         );
 
         $this->assertNotEmpty($response->getData());
@@ -170,7 +182,7 @@ class IntencaoVendaApiTest extends PHPUnit
 
     public function test_getById()
     {
-        $response = $this->_intencaoVendaApi->getById(22571);
+        $response = $this->_intencaoVendaApi->getById(self::$id);
 
         $this->assertNotEmpty($response->getData());
         $this->assertInstanceOf(\DateTime::class, $response->getData());

@@ -50,6 +50,51 @@ class PagamentoExterno implements \JsonSerializable
     private $terminal;
 
     /**
+     * @var integer
+     */
+    private $nsuTid;
+
+    /**
+     * @var string
+     */
+    private $autorizacao;
+
+    /**
+     * @var string
+     */
+    private $adquirente;
+
+    /**
+     * @var string
+     */
+    private $codigoRespostaAdquirente;
+
+    /**
+     * @var string
+     */
+    private $mensagemRespostaAdquirente;
+
+    /**
+     * @var \DateTime
+     */
+    private $dataAdquirente;
+
+    /**
+     * @var string
+     */
+    private $respostaAdquirente;
+
+    /**
+     * @var string
+     */
+    private $comprovanteAdquirente;
+
+    /**
+     * @var array
+     */
+    private $comprovanteAdquirenteLinhas;
+
+    /**
      * PagamentoExterno constructor.
      */
     public function __construct()
@@ -217,6 +262,174 @@ class PagamentoExterno implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getNsuTid()
+    {
+        return $this->nsuTid;
+    }
+
+    /**
+     * @param int $nsuTid
+     * @return PagamentoExterno
+     */
+    public function setNsuTid($nsuTid)
+    {
+        $this->nsuTid = $nsuTid;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAutorizacao()
+    {
+        return $this->autorizacao;
+    }
+
+    /**
+     * @param string $autorizacao
+     * @return PagamentoExterno
+     */
+    public function setAutorizacao($autorizacao)
+    {
+        $this->autorizacao = $autorizacao;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdquirente()
+    {
+        return $this->adquirente;
+    }
+
+    /**
+     * @param string $adquirente
+     * @return PagamentoExterno
+     */
+    public function setAdquirente($adquirente)
+    {
+        $this->adquirente = $adquirente;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCodigoRespostaAdquirente()
+    {
+        return $this->codigoRespostaAdquirente;
+    }
+
+    /**
+     * @param string $codigoRespostaAdquirente
+     * @return PagamentoExterno
+     */
+    public function setCodigoRespostaAdquirente($codigoRespostaAdquirente)
+    {
+        $this->codigoRespostaAdquirente = $codigoRespostaAdquirente;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMensagemRespostaAdquirente()
+    {
+        return $this->mensagemRespostaAdquirente;
+    }
+
+    /**
+     * @param string $mensagemRespostaAdquirente
+     * @return PagamentoExterno
+     */
+    public function setMensagemRespostaAdquirente($mensagemRespostaAdquirente)
+    {
+        $this->mensagemRespostaAdquirente = $mensagemRespostaAdquirente;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDataAdquirente()
+    {
+        return $this->dataAdquirente;
+    }
+
+    /**
+     * @param \DateTime $dataAdquirente
+     * @return PagamentoExterno
+     */
+    public function setDataAdquirente($dataAdquirente)
+    {
+        $this->dataAdquirente = $dataAdquirente;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRespostaAdquirente()
+    {
+        return $this->respostaAdquirente;
+    }
+
+    /**
+     * @param string $respostaAdquirente
+     * @return PagamentoExterno
+     */
+    public function setRespostaAdquirente($respostaAdquirente)
+    {
+        $this->respostaAdquirente = $respostaAdquirente;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComprovanteAdquirente()
+    {
+        return $this->comprovanteAdquirente;
+    }
+
+    /**
+     * @param string $comprovanteAdquirente
+     * @return PagamentoExterno
+     */
+    public function setComprovanteAdquirente($comprovanteAdquirente)
+    {
+        $this->comprovanteAdquirente = $comprovanteAdquirente;
+
+        /**
+         * Divide comprovante en linhas para facilitar uso
+         */
+        $this->comprovanteAdquirenteLinhas = explode(PHP_EOL, $comprovanteAdquirente);
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getComprovanteAdquirenteLinhas()
+    {
+        return $this->comprovanteAdquirenteLinhas;
+    }
+
+    /**
+     * @param array $comprovanteAdquirenteLinhas
+     * @return PagamentoExterno
+     */
+    public function setComprovanteAdquirenteLinhas($comprovanteAdquirenteLinhas)
+    {
+        $this->comprovanteAdquirenteLinhas = $comprovanteAdquirenteLinhas;
+        return $this;
+    }
+
     function jsonSerialize()
     {
         return [
@@ -227,6 +440,14 @@ class PagamentoExterno implements \JsonSerializable
             'tipoParcelamento' => $this->tipoParcelamento,
             'pagamentoExternoStatus' => $this->pagamentoExternoStatus,
             'intencoesVenda' => $this->intencoesVenda,
+            'nsuTid' => $this->nsuTid,
+            'autorizacao' => $this->autorizacao,
+            'adquirente' => $this->adquirente,
+            'codigoRespostaAdquirente' => $this->codigoRespostaAdquirente,
+            'mensagemRespostaAdquirente' => $this->mensagemRespostaAdquirente,
+            'dataAdquirente' => $this->dataAdquirente,
+            'respostaAdquirente' => $this->respostaAdquirente,
+            'comprovanteAdquirente' => $this->comprovanteAdquirente
         ];
     }
 

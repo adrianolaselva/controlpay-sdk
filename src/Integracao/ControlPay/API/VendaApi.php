@@ -48,7 +48,7 @@ class VendaApi extends AbstractAPI
                 $venderRequest->setTerminalId(
                     $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_TERMINAL_ID)
                 );
-
+            
             if(empty($venderRequest->getFormaPagamentoId()))
                 $venderRequest->setFormaPagamentoId(
                     $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_FORMA_PAGAMENTO_ID)

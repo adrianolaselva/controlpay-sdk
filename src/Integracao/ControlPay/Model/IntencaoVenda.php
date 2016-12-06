@@ -170,6 +170,11 @@ class IntencaoVenda implements \JsonSerializable
     private $pagamentosExterno;
 
     /**
+     * @var array
+     */
+    private $pagamentosExternos;
+
+    /**
      * @var Pessoa
      */
     private $vendedor;
@@ -834,6 +839,29 @@ class IntencaoVenda implements \JsonSerializable
     public function setCliente($cliente)
     {
         $this->cliente = $cliente;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPagamentosExternos()
+    {
+        return $this->pagamentosExternos;
+    }
+
+    /**
+     * @param array $pagamentosExternos
+     * @return IntencaoVenda
+     */
+    public function setPagamentosExternos($pagamentosExternos)
+    {
+        if(is_array($pagamentosExternos))
+            foreach ($pagamentosExternos as $pagamentoExterno) {
+                $this->pagamentosExternos[] = SerializerHelper::denormalize(
+                    $pagamentoExterno, PagamentoExterno::class);
+            }
+
         return $this;
     }
 
