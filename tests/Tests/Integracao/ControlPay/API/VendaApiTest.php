@@ -118,6 +118,9 @@ class VendaApiTest extends PHPUnit
         $this->assertNotEmpty($response->getIntencaoVenda()->getPagamentosExterno());
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function test_cancelarVenda_semtef()
     {
         $response = $this->_venderApi->cancelarVenda(

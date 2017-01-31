@@ -85,6 +85,7 @@ class VenderRequest implements \JsonSerializable
      */
     public function __construct()
     {
+
     }
 
     /**
