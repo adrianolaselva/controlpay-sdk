@@ -119,42 +119,42 @@ class VendaApiTest extends PHPUnit
         $this->assertNotEmpty($response->getIntencaoVenda()->getPagamentosExterno());
     }
 
-    public function test_cancelarVenda_semtef()
-    {
-        try{
-            $response = $this->_venderApi->cancelarVenda(
-                (new CancelarVendaRequest())
-                    ->setReferencia(self::$referencia)
-                    ->setIntencaoVendaId(self::$intencaoVendaId)
-                    //->setTerminalId(self::$terminalId)
-                    ->setSenhaTecnica(self::$senhaTecnica)
-            //->setAguardarTefIniciarTransacao(false)
-            );
-        }catch (RequestException $ex) {
-            return;
-        }
-
-        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_venderApi->getResponse());
-        $this->assertNotEmpty($response->getData());
-        $this->assertNotEmpty($response->getIntencaoVenda()->getToken());
-        $this->assertGreaterThanOrEqual(1, $response->getIntencaoVenda()->getQuantidade());
-        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorOriginal());
-        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorAcrescimo());
-        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorDesconto());
-        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorFinal());
-        $this->assertInstanceOf(\DateTime::class, $response->getData());
-        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento());
-        $this->assertInstanceOf(IntencaoVenda::class, $response->getIntencaoVenda());
-        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento());
-        $this->assertInstanceOf(FormaPagamento::class, $response->getIntencaoVenda()->getFormaPagamento());
-        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento()->getFluxoPagamento());
-        $this->assertInstanceOf(FluxoPagamento::class, $response->getIntencaoVenda()->getFormaPagamento()->getFluxoPagamento());
-        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
-        $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
-        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
-        $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
-        $this->assertNotEmpty($response->getIntencaoVenda()->getProdutos());
-    }
+//    public function test_cancelarVenda_semtef()
+//    {
+//        try{
+//            $response = $this->_venderApi->cancelarVenda(
+//                (new CancelarVendaRequest())
+//                    ->setReferencia(self::$referencia)
+//                    ->setIntencaoVendaId(self::$intencaoVendaId)
+//                    //->setTerminalId(self::$terminalId)
+//                    ->setSenhaTecnica(self::$senhaTecnica)
+//            //->setAguardarTefIniciarTransacao(false)
+//            );
+//        }catch (RequestException $ex) {
+//            return;
+//        }
+//
+//        $this->assertInstanceOf(\GuzzleHttp\Message\ResponseInterface::class, $this->_venderApi->getResponse());
+//        $this->assertNotEmpty($response->getData());
+//        $this->assertNotEmpty($response->getIntencaoVenda()->getToken());
+//        $this->assertGreaterThanOrEqual(1, $response->getIntencaoVenda()->getQuantidade());
+//        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorOriginal());
+//        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorAcrescimo());
+//        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorDesconto());
+//        $this->assertGreaterThanOrEqual(0, $response->getIntencaoVenda()->getValorFinal());
+//        $this->assertInstanceOf(\DateTime::class, $response->getData());
+//        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento());
+//        $this->assertInstanceOf(IntencaoVenda::class, $response->getIntencaoVenda());
+//        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento());
+//        $this->assertInstanceOf(FormaPagamento::class, $response->getIntencaoVenda()->getFormaPagamento());
+//        $this->assertNotEmpty($response->getIntencaoVenda()->getFormaPagamento()->getFluxoPagamento());
+//        $this->assertInstanceOf(FluxoPagamento::class, $response->getIntencaoVenda()->getFormaPagamento()->getFluxoPagamento());
+//        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
+//        $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
+//        $this->assertNotEmpty($response->getIntencaoVenda()->getIntencaoVendaStatus());
+//        $this->assertInstanceOf(IntencaoVendaStatus::class, $response->getIntencaoVenda()->getIntencaoVendaStatus());
+//        $this->assertNotEmpty($response->getIntencaoVenda()->getProdutos());
+//    }
 
     public function test_getByFiltros_referencia()
     {
