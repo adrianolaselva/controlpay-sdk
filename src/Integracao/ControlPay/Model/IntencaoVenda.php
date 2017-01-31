@@ -452,10 +452,14 @@ class IntencaoVenda implements \JsonSerializable
      */
     public function setData($data)
     {
+
         $this->data = \DateTime::createFromFormat('d/m/Y H:i:s.u', $data);
 
-        if(!$this->data)
+        if(empty($this->data))
             $this->data = \DateTime::createFromFormat('d/m/Y H:i:s', $data);
+
+        if(empty($this->data))
+            $this->data = \DateTime::createFromFormat('d/m/Y H:i', $data);
 
         return $this;
     }
