@@ -98,7 +98,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param int $operadorId
-     * @return Venda
+     * @return VenderRequest
      */
     public function setOperadorId($operadorId)
     {
@@ -116,7 +116,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param int $pessoaClienteId
-     * @return Venda
+     * @return VenderRequest
      */
     public function setPessoaClienteId($pessoaClienteId)
     {
@@ -134,7 +134,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param int $formaPagamentoId
-     * @return Venda
+     * @return VenderRequest
      */
     public function setFormaPagamentoId($formaPagamentoId)
     {
@@ -152,7 +152,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param int $terminalId
-     * @return Venda
+     * @return VenderRequest
      */
     public function setTerminalId($terminalId)
     {
@@ -170,7 +170,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param int $pedidoId
-     * @return Venda
+     * @return VenderRequest
      */
     public function setPedidoId($pedidoId)
     {
@@ -206,7 +206,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param float $valorTotalVendido
-     * @return Venda
+     * @return VenderRequest
      */
     public function setValorTotalVendido($valorTotalVendido)
     {
@@ -224,7 +224,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param float $valorAcrescimo
-     * @return Venda
+     * @return VenderRequest
      */
     public function setValorAcrescimo($valorAcrescimo)
     {
@@ -242,7 +242,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param float $valorDesconto
-     * @return Venda
+     * @return VenderRequest
      */
     public function setValorDesconto($valorDesconto)
     {
@@ -260,7 +260,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param string $observacao
-     * @return Venda
+     * @return VenderRequest
      */
     public function setObservacao($observacao)
     {
@@ -278,7 +278,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param boolean $parcelamentoAdmin
-     * @return Venda
+     * @return VenderRequest
      */
     public function setParcelamentoAdmin($parcelamentoAdmin)
     {
@@ -296,7 +296,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param int $quantidadeParcelas
-     * @return Venda
+     * @return VenderRequest
      */
     public function setQuantidadeParcelas($quantidadeParcelas)
     {
@@ -314,7 +314,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param boolean $aguardarTefIniciarTransacao
-     * @return Venda
+     * @return VenderRequest
      */
     public function setAguardarTefIniciarTransacao($aguardarTefIniciarTransacao)
     {
@@ -332,7 +332,7 @@ class VenderRequest implements \JsonSerializable
 
     /**
      * @param array $produtosVendidos
-     * @return Venda
+     * @return VenderRequest
      */
     public function setProdutosVendidos($produtosVendidos)
     {

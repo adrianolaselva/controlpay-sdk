@@ -61,18 +61,19 @@ class VendaApi extends AbstractAPI
                     )
                 );
 
-            foreach ($venderRequest->getProdutosVendidos() as $key => $produto)
-            {
-                if(empty($produto->getId()))
-                    $venderRequest->getProdutosVendidos()[$key]->setId(
-                        $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID)
-                    );
+            if(!empty($venderRequest->getProdutosVendidos()))
+                foreach ($venderRequest->getProdutosVendidos() as $key => $produto)
+                {
+                    if(empty($produto->getId()))
+                        $venderRequest->getProdutosVendidos()[$key]->setId(
+                            $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_ID)
+                        );
 
-                if(empty($produto->getQuantidade()))
-                    $venderRequest->getProdutosVendidos()[$key]->setQuantidade(
-                        $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_QTDE)
-                    );
-            }
+                    if(empty($produto->getQuantidade()))
+                        $venderRequest->getProdutosVendidos()[$key]->setQuantidade(
+                            $this->_client->getParameter(ControlPayParameterConst::CONTROLPAY_DEFAULT_PRODUTO_QTDE)
+                        );
+                }
 
             $this->response = $this->_httpClient->post(__FUNCTION__,[
                 'body' => json_encode($venderRequest),
