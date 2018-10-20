@@ -5,6 +5,7 @@ language: php
 php:
   - '5.6'
   - '7.0'
+  - '7.1'
 
 addons:
   apt:
@@ -14,4 +15,4 @@ before_script:
   - composer install
 
 script:
-  - "phpunit --configuration phpunit.xml --coverage-text"
+  - "vendor/bin/phpunit --configuration phpunit.xml --coverage-text"
